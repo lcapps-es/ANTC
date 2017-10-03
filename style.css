@@ -48,4 +48,5 @@
 #clock h1 {
 	font-size: 6em;
 	margin-bottom: 10px;
+	text-shadow: 2px 2px 10px rgba(221, 221, 221, 0.212);
 }
