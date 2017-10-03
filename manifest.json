@@ -27,8 +27,8 @@
     "matches": ["https://api.openweathermap.org/*", "https://*.unsplash.com/*"]
   },
   "offline_enabled": true,
-  "optional_permissions": ["tabs"],
-  "permissions": ["tabs"],
+  "optional_permissions": ["tabs","geolocation"],
+  "permissions": ["tabs","geolocation"],
   "short_name": "ANTC",
   "version_name": "Alpha 0.0.1"
 }
