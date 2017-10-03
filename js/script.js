@@ -40,7 +40,7 @@ function getLocation(callback) {
 
 
 function getWeather() {
-	var path = "http://samples.openweathermap.org/data/2.5/weather?appid=b1b15e88fa797225412429c1c50c122a1" //lat=35&lon=139&
+	var path = "http://samples.openweathermap.org/data/2.5/weather?appid=45dc870e41c6c3980d4d1e446bf6d079" //lat=35&lon=139&
 	//var path = "http://api.openweathermap.org/data/2.5/weather?";
 
 	getLocation(function(pos){		
