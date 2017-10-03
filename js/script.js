@@ -40,8 +40,7 @@ function getLocation(callback) {
 
 
 function getWeather() {
-	var path = "http://samples.openweathermap.org/data/2.5/weather?appid=45dc870e41c6c3980d4d1e446bf6d079" //lat=35&lon=139&
-	//var path = "http://api.openweathermap.org/data/2.5/weather?";
+	var path = "http://api.openweathermap.org/data/2.5/weather?appid=45dc870e41c6c3980d4d1e446bf6d079&units=metric&lang=es";
 
 	getLocation(function(pos){		
 			var url = path + "&lat=" + pos.latitude + "&lon=" + pos.longitude;
@@ -56,11 +55,14 @@ function getWeather() {
 					console.log(data);
 					// Seteamos ciudad
 					document.getElementById("location").innerHTML = data.name;
+
+					document.getElementById("temperature").getElementsByTagName("span")[0].innerHTML = data.main.temp + "º"	;
+
+					
 				}
 			};
 			xhttp.send();
 
 		});
-			
 
 }
