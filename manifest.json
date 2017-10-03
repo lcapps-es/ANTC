@@ -17,7 +17,7 @@
     "newtab": "index.html"
   },
   "content_security_policy" : "style-src 'self' https://fonts.googleapis.com ; img-src 'self' https://secure.gravatar.com https://source.unsplash.com https://images.unsplash.com https://docs.google.com https://ssl.google-analytics.com ;  default-src 'self' https://themes.googleusercontent.com https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org https://www.google.com/  https://ssl.google-analytics.com https://www.youtube.com ;  script-src 'self' https://api.openweathermap.org https://source.unsplash.com https://images.unsplash.com https://www.google.com/ https://code.jquery.com/ https://cdnjs.cloudflare.com/ https://ssl.google-analytics.com https://www.youtube.com ;  connect-src 'self' https://api.openweathermap.org https://source.unsplash.com https://images.unsplash.com https://www.google.com/ https://ssl.google-analytics.com https://www.youtube.com ;  object-src 'self' https://api.openweathermap.org https://source.unsplash.com https://images.unsplash.com https://www.google.com/ https://ssl.google-analytics.com https://www.youtube.com ",
-  "optional_permissions": ["tabs"],
-  "permissions": ["tabs"],
+  "optional_permissions": ["tabs","geolocation"],
+  "permissions": ["tabs","geolocation"],
   "short_name": "ANTC"
 }
