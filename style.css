@@ -8,7 +8,6 @@
 	right: 0;
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-image: url('https://source.unsplash.com/random/1920x1080');
 	opacity: 0;
 	transition: opacity 1s ease-out;
 }

@@ -40,7 +40,7 @@ function getLocation(callback) {
 
 
 function getWeather() {
-	var path = "http://api.openweathermap.org/data/2.5/weather?appid=45dc870e41c6c3980d4d1e446bf6d079&units=metric&lang=es";
+	var path = "https://api.openweathermap.org/data/2.5/weather?appid=45dc870e41c6c3980d4d1e446bf6d079&units=metric&lang=es";
 
 	getLocation(function(pos){		
 			var url = path + "&lat=" + pos.latitude + "&lon=" + pos.longitude;
