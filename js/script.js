@@ -18,7 +18,7 @@ $(document).ready(function(){
 });
 
 function changeBackground() {
-	$('#background').css('background-image', 'url("https://source.unsplash.com/1920x1080")').waitForImages(function() {
+	$('#background').css('background-image', 'url("https://source.unsplash.com/category/nature/1920x1080")').waitForImages(function() {
 		$('#background').addClass('show');
 	}, $.noop, true);
 }
