@@ -1,35 +1,6 @@
 $(document).ready(function(){
 
-	var xhr = new XMLHttpRequest();       
-    xhr.open("GET", "http://source.unsplash.com/1920x1080", true); 
-    xhr.responseType = "blob";
-    xhr.onload = function (e) {
-            console.log(this.response);
-            var reader = new FileReader();
-            reader.onloadend = function(event) {
-			   var res = event.target.result;
-
-			   $('#background').css('background-image', 'url('+res+')').waitForImages(function() {
-					$('#background').addClass('show');
-			
-					BackgroundCheck.init({
-						targets: '.changeColor',
-						images: '#background',
-						debug: true
-					});
-					BackgroundCheck.refresh();
-				}, $.noop, true);
-            }
-            var file = this.response;
-            reader.readAsDataURL(file)
-    };
-    xhr.send()
-
-
-
-
-	
-
+	changeBackground();
 	updateClock();
 
 	$('#search input').keypress(function(e) {
@@ -45,6 +16,12 @@ $(document).ready(function(){
 
 	getWeather();
 });
+
+function changeBackground() {
+	$('#background').css('background-image', 'url("https://source.unsplash.com/1920x1080")').waitForImages(function() {
+		$('#background').addClass('show');
+	}, $.noop, true);
+}
 
 function updateClock() {
     var now = new Date(); // current date

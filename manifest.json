@@ -1,10 +1,4 @@
 {
-  // Required
-  "app": {
-    "launch": {
-      "local_path": "index.html"
-		}
-  },
   "manifest_version": 2,
   "name": "ANTC",
   "version": "0.0.1",
@@ -21,14 +15,8 @@
   "chrome_url_overrides" : {
     "newtab": "index.html"
   },
-  "content_security_policy" : "style-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com ; img-src 'self' https://secure.gravatar.com https://source.unsplash.com https://images.unsplash.com https://docs.google.com https://ssl.google-analytics.com ;  default-src 'self' https://themes.googleusercontent.com https://fonts.gstatic.com https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org https://www.google.com/  https://ssl.google-analytics.com https://www.youtube.com ;  script-src 'self' https://api.openweathermap.org https://fonts.gstatic.com https://source.unsplash.com https://images.unsplash.com https://www.google.com/ https://code.jquery.com/ https://cdnjs.cloudflare.com/ https://ssl.google-analytics.com https://www.youtube.com ;  connect-src 'self' https://api.openweathermap.org https://fonts.gstatic.com https://source.unsplash.com/* https://images.unsplash.com/* https://www.google.com/ https://ssl.google-analytics.com https://www.youtube.com ;  object-src 'self' https://api.openweathermap.org https://fonts.gstatic.com https://source.unsplash.com https://images.unsplash.com https://www.google.com/ https://ssl.google-analytics.com https://www.youtube.com ",
-  "current_locale": "es",
-  "externally_connectable": {
-    "matches": ["https://api.openweathermap.org/*", "https://*.unsplash.com/*"]
-  },
-  "offline_enabled": true,
+  "content_security_policy" : "default-src 'self' data: https://fonts.googleapis.com https://fonts.gstatic.com https://source.unsplash.com https://images.unsplash.com https://docs.google.com https://ssl.google-analytics.com https://themes.googleusercontent.com https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org https://www.google.com/  https://ssl.google-analytics.com https://www.youtube.com https://code.jquery.com/ https://cdnjs.cloudflare.com/ ; script-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://source.unsplash.com https://images.unsplash.com https://docs.google.com https://ssl.google-analytics.com https://themes.googleusercontent.com https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org https://www.google.com/  https://ssl.google-analytics.com https://www.youtube.com https://code.jquery.com/ https://cdnjs.cloudflare.com/ ; object-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://source.unsplash.com https://images.unsplash.com https://docs.google.com https://ssl.google-analytics.com https://themes.googleusercontent.com https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org https://www.google.com/  https://ssl.google-analytics.com https://www.youtube.com https://code.jquery.com/ https://cdnjs.cloudflare.com/ ; style-src 'unsafe-inline' 'self' data: https://fonts.googleapis.com https://fonts.gstatic.com https://source.unsplash.com https://images.unsplash.com https://docs.google.com https://ssl.google-analytics.com https://themes.googleusercontent.com https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org https://www.google.com/  https://ssl.google-analytics.com https://www.youtube.com https://code.jquery.com/ https://cdnjs.cloudflare.com/ ",
   "optional_permissions": ["tabs","geolocation"],
   "permissions": ["tabs","geolocation"],
-  "short_name": "ANTC",
-  "version_name": "Alpha 0.0.1"
+  "short_name": "ANTC"
 }
