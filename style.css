@@ -43,10 +43,21 @@
 	transform: translate(-50%, -50%);
 	text-align: center;
 	left: 50%;
+	background-color: rgba(184,184,184,0.7);
+	padding: 20px 0;
 }
 
 #clock h1 {
 	font-size: 6em;
 	margin-bottom: 10px;
-	text-shadow: 2px 2px 10px rgba(221, 221, 221, 0.212);
+	margin-top: 0;
+}
+
+#search input {
+	padding: 2px 5px;
+	border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 4px solid rgba(245, 245, 245, 0.7);
+  color: black;
 }
