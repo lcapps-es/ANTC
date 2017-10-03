@@ -1,14 +1,34 @@
 $(document).ready(function(){
-	$('#background').css('background-image', "url('https://source.unsplash.com/random/1920x1080')").waitForImages(function() {
-		$('#background').addClass('show');
 
-		BackgroundCheck.init({
-			targets: '.changeColor',
-			images: '#background',
-			debug: true
-		});
-		BackgroundCheck.refresh();
-	}, $.noop, true);
+	var xhr = new XMLHttpRequest();       
+    xhr.open("GET", "http://source.unsplash.com/1920x1080", true); 
+    xhr.responseType = "blob";
+    xhr.onload = function (e) {
+            console.log(this.response);
+            var reader = new FileReader();
+            reader.onloadend = function(event) {
+			   var res = event.target.result;
+
+			   $('#background').css('background-image', 'url('+res+')').waitForImages(function() {
+					$('#background').addClass('show');
+			
+					BackgroundCheck.init({
+						targets: '.changeColor',
+						images: '#background',
+						debug: true
+					});
+					BackgroundCheck.refresh();
+				}, $.noop, true);
+            }
+            var file = this.response;
+            reader.readAsDataURL(file)
+    };
+    xhr.send()
+
+
+
+
+	
 
 	updateClock();
 
