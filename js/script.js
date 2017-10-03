@@ -12,6 +12,8 @@ $(document).ready(function(){
 			top.location = 'https://www.google.com/search?q='+$(this).val();
 		}
 	});
+
+	getWeather();
 });
 
 function updateClock() {
@@ -29,7 +31,6 @@ function updateClock() {
 function getLocation(callback) {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position){
-			console.log(position);
 			callback(position.coords);
 		});
 	} else {
@@ -40,30 +41,26 @@ function getLocation(callback) {
 
 function getWeather() {
 	var path = "http://samples.openweathermap.org/data/2.5/weather?appid=b1b15e88fa797225412429c1c50c122a1" //lat=35&lon=139&
+	//var path = "http://api.openweathermap.org/data/2.5/weather?";
 
 	getLocation(function(pos){		
 			var url = path + "&lat=" + pos.latitude + "&lon=" + pos.longitude;
 			console.log(url);
-	});
-	
+			
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", url, true);
+			xhttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					var data = JSON.parse(this.response);
 
-	/*
-	var xhttp = new XMLHttpRequest();
-	var url = getUrl();
+					console.log(data);
+					// Seteamos ciudad
+					document.getElementById("location").innerHTML = data.name;
+				}
+			};
+			xhttp.send();
 
-	xhttp.open("GET", getUrl(), true);
-	xhttp.onreadystatechange = function () {
-		if (this.readyState == 4 && this.status == 200) {
-			navigator.splashscreen.hide();
-			offline(false);
-			document.location = getUrl();
-		} else if (this.readyState == 4) {
-			offline();
-		}
-	};
-	xhttp.send();
-
-	*/
-
+		});
+			
 
 }
