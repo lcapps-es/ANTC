@@ -11,8 +11,14 @@
 	<link rel="stylesheet" href="libs/weather-icons/css/weather-icons-wind.min.css" />
 </head>
 <body>
-	<div class="background"></div>
-	<div id="clock"></div>
+	<div id="background"></div>
+	<div class="center">
+		<div id="clock">
+			<h1>00:00:00</h1>
+			<h3 id="greetings"></h3>
+		</div>
+		<div id="search"><input type="text" placeholder="Google Search"/></div>
+	</div>
 	<div id="weather">
 		<div id="temperature">
 			<span>21º</span>
@@ -22,6 +28,7 @@
 		<div id="location" class="">Madrid</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.waitforimages/1.5.0/jquery.waitforimages.min.js"></script>
 	<script src="js/script.js"></script>
 </body>
 </html>

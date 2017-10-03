@@ -1,5 +1,5 @@
 
-.background {
+#background {
 	z-index: -1;
 	position: fixed;
 	top: 0;
@@ -10,10 +10,10 @@
 	background-repeat: no-repeat;
 	background-image: url('https://source.unsplash.com/random/1920x1080');
 	opacity: 0;
-	transition: opacity 2s ease-out;
+	transition: opacity 1s ease-out;
 }
 
-.show {
+#background.show {
 	opacity: 1;
 }
 
@@ -32,4 +32,20 @@
 
 #temperature {
 	font-size: 3em;
+}
+
+.center {
+	top: 50%;
+	width: 100%;
+	position: absolute;
+	-ms-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+	left: 50%;
+}
+
+#clock h1 {
+	font-size: 6em;
+	margin-bottom: 10px;
 }
