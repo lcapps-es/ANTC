@@ -1,59 +1,32 @@
 {
   // Required
   "app": {
-    "background": {
-      // Optional
-      "scripts": ["background.js"]
-    }
   },
   "manifest_version": 2,
-  "name": "My App",
-  "version": "versionString",
+  "name": "ANTC",
+  "version": "0.0.1",
 
   // Recommended
-  "default_locale": "en",
-  "description": "A plain text description",
-  "icons": {...},
+  "default_locale": "es",
+  "description": "Awesome New Tab Customized",
+  "icons": {
+    "48": "/img/icon.jpg"
+  },
 
   // Optional
-  "action_handlers": ["new_note"],
-  "author": ...,
-  "automation": ...,
-  "bluetooth": {
-    "uuids": ["1105", "1006"]
+  "author": "LCApps",
+  "chrome_url_overrides" : {
+    "newtab": "index.html"
   },
-  "commands": {...},
-  "current_locale": ...,
-  "event_rules": [{...}],
+  "content_security_policy" : "style-src 'self'; img-src 'self' https://secure.gravatar.com https://docs.google.com https://ssl.google-analytics.com ;  default-src 'self' https://themes.googleusercontent.com http://api.openweathermap.org  https://ssl.google-analytics.com https://www.youtube.com ;  script-src 'self' http://api.openweathermap.org https://ssl.google-analytics.com https://www.youtube.com ;  connect-src 'self' http://api.openweathermap.org https://ssl.google-analytics.com https://www.youtube.com ;  object-src 'self' http://api.openweathermap.org https://ssl.google-analytics.com https://www.youtube.com ",
+  "current_locale": "es",
   "externally_connectable": {
-    "matches": ["*://*.example.com/*"]
+    "matches": ["http://api.openweathermap.org/*"]
   },
-  "file_handlers": {...},
-  "file_system_provider_capabilities": {
-    "configurable": true,
-    "multiple_mounts": true,
-    "source": "network"
-  },
-  "import": [{"id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}],
-  "key": "publicKey",
-  "kiosk": {
-    "always_update": ...,
-    "required_platform_version": ...
-  },
-  "kiosk_enabled": true,
-  "kiosk_only": true,
-  "kiosk_secondary_apps": ...,
-  "minimum_chrome_version": "versionString",
-  "nacl_modules": [...],
-  "oauth2": ...,
   "offline_enabled": true,
   "optional_permissions": ["tabs"],
   "permissions": ["tabs"],
-  "platforms": ...,
-  "requirements": {...},
-  "sandbox": [...],
-  "short_name": "Short Name",
-  "signature": ...,
+  "short_name": "ANTC",
   "sockets": {
     "tcp": {
       "connect": "*"
@@ -62,15 +35,5 @@
       "send": "*"
     }
   },
-  "storage": {
-    "managed_schema": "schema.json"
-  },
-  "system_indicator": ...,
-  "update_url": "http://path/to/updateInfo.xml",
-  "url_handlers": {...},
-  "usb_printers": {
-    "filters": [...]
-  },
-  "version_name": "aString",
-  "webview": {...}
+  "version_name": "Alpha 0.0.1"
 }
