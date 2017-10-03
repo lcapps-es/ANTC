@@ -4,11 +4,19 @@ $(document).ready(function(){
 	}, $.noop, true);
 
 	updateClock();
+	//updateGreetings();
+
+	$('#search input').keypress(function(e) {
+		if(e.which == 13) {
+			e.preventDefault();
+			top.location = 'https://www.google.com/search?q='+$(this).val();
+		}
+	});
 });
 
 function updateClock() {
     var now = new Date(); // current date
-	time = now.getHours() + ':' + ("0" + now.getMinutes()).slice(-2) + ':' + ("0" + now.getSeconds()).slice(-2);
+	time = ("0" + now.getHours()).slice(-2) + ':' + ("0" + now.getMinutes()).slice(-2) + ':' + ("0" + now.getSeconds()).slice(-2);
 
     // set the content of the element with the ID time to the formatted string
     $('#clock h1').html(time);
