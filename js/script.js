@@ -55,9 +55,9 @@ function getWeather() {
 					console.log(data);
 					
 					document.getElementById("location").innerHTML = data.name;
-					document.getElementById("temperature").getElementsByTagName("span")[0].innerHTML = data.main.temp + "º";
-					document.getElementById("others").getElementsByTagName("span")[0].innerHTML = data.main.temp_min + "º";
-					document.getElementById("others").getElementsByTagName("span")[1].innerHTML = data.main.temp_max + "º";
+					document.getElementById("temperature").getElementsByTagName("span")[0].innerHTML = normalizeTemp(data.main.temp);
+					document.getElementById("others").getElementsByTagName("span")[0].innerHTML = normalizeTemp(data.main.temp_min);
+					document.getElementById("others").getElementsByTagName("span")[1].innerHTML = normalizeTemp(data.main.temp_max);
 					document.getElementById("iWeather").className += getWeatherIcon(data.weather[0].id);
 				}
 			};
@@ -67,6 +67,9 @@ function getWeather() {
 
 }
 
+function normalizeTemp(temp) {
+	return Math.round(temp * 10)/10 + "º";
+}
 
 function getWeatherIcon(id) {
 
