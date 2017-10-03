@@ -1,7 +1,24 @@
-
 i {
 	/* color: #fff; */
 	font-size: 3rem; 
+}
+
+.background {
+	z-index: -1;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-image: url('https://source.unsplash.com/random/1920x1080');
+	opacity: 0;
+	transition: opacity 2s ease-out;
+}
+
+.show {
+	opacity: 1;
 }
 
 #weather {
