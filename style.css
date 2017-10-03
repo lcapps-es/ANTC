@@ -1,3 +1,10 @@
+body {
+	font-family: 'Noto Sans', sans-serif;
+}
+
+.half {
+	width: 50%;
+}
 
 #background {
 	z-index: -1;
@@ -16,7 +23,7 @@
 	opacity: 1;
 }
 
-#weather {
+#weather, #miniweather {
 	padding: 20px;
 	border-radius: 8px;
 	background-color: rgba(184,184,184,0.7);
@@ -24,13 +31,34 @@
 	bottom: 25px;
 	right: 25px;
 	text-align: center;
-	font-family: 'Acme', sans-serif;	
 	font-size: 1em;
-	
+	display: none;
+	transition: display 1s easy-in-out;
 }
 
 #temperature {
 	font-size: 3em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 6em;
+}
+
+.changeColor.background--light {
+	color: black;
+}
+
+.changeColor.background--dark {
+	color: white;
+}
+
+.changeColor.background--complex {
+	color: gray;
+}
+
+#summary {
+	font-size: .4em;
+	border-left: 3px solid black;
 }
 
 .center {
@@ -42,7 +70,6 @@
 	transform: translate(-50%, -50%);
 	text-align: center;
 	left: 50%;
-	background-color: rgba(184,184,184,0.7);
 	padding: 20px 0;
 }
 
@@ -55,8 +82,8 @@
 #search input {
 	padding: 2px 5px;
 	border: 0;
-  outline: 0;
-  background: transparent;
-  border-bottom: 4px solid rgba(245, 245, 245, 0.7);
-  color: black;
+	outline: 0;
+	background: transparent;
+	border-bottom: 4px solid rgba(245, 245, 245, 0.7);
+	color: black;
 }

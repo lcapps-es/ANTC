@@ -1,16 +1,26 @@
 $(document).ready(function(){
 	$('#background').css('background-image', "url('https://source.unsplash.com/random/1920x1080')").waitForImages(function() {
 		$('#background').addClass('show');
+
+		BackgroundCheck.init({
+			targets: '.changeColor',
+			images: '#background',
+			debug: true
+		});
+		BackgroundCheck.refresh();
 	}, $.noop, true);
 
 	updateClock();
-	//updateGreetings();
 
 	$('#search input').keypress(function(e) {
 		if(e.which == 13) {
 			e.preventDefault();
 			top.location = 'https://www.google.com/search?q='+$(this).val();
 		}
+	});
+
+	$('#weather, #miniweather').on('click', function(e){
+		$('#weather, #miniweather').toggle();
 	});
 
 	getWeather();
@@ -43,28 +53,22 @@ function getWeather() {
 	var path = "https://api.openweathermap.org/data/2.5/weather?appid=45dc870e41c6c3980d4d1e446bf6d079&units=metric&lang=es";
 
 	getLocation(function(pos){		
-			var url = path + "&lat=" + pos.latitude + "&lon=" + pos.longitude;
-			console.log(url);
+		var url = path + "&lat=" + pos.latitude + "&lon=" + pos.longitude;
+		
+		$.get({
+			url: url,
+		}).done(function(response){
+			$('#location').text(response.name);
+			$('#tempnow').text(normalizeTemp(response.main.temp));
+			$('#others').text(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
+			$('#iWeather').addClass(getWeatherIcon(response.weather[0].id));
 			
-			var xhttp = new XMLHttpRequest();
-			xhttp.open("GET", url, true);
-			xhttp.onreadystatechange = function () {
-				if (this.readyState == 4 && this.status == 200) {
-					var data = JSON.parse(this.response);
+			$('#miniiWeather').addClass(getWeatherIcon(response.weather[0].id));
+			$('#minitemp').text(normalizeTemp(response.main.temp));
 
-					console.log(data);
-					
-					document.getElementById("location").innerHTML = data.name;
-					document.getElementById("temperature").getElementsByTagName("span")[0].innerHTML = normalizeTemp(data.main.temp);
-					document.getElementById("others").getElementsByTagName("span")[0].innerHTML = normalizeTemp(data.main.temp_min);
-					document.getElementById("others").getElementsByTagName("span")[1].innerHTML = normalizeTemp(data.main.temp_max);
-					document.getElementById("iWeather").className += getWeatherIcon(data.weather[0].id);
-				}
-			};
-			xhttp.send();
-
+			$('#miniweather').show();
 		});
-
+	});
 }
 
 function normalizeTemp(temp) {

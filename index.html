@@ -5,32 +5,36 @@
 	
 	<title>New Tab</title>
 	<link rel="stylesheet" href="style.css">
-	<link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">	
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
 	<link rel="stylesheet" href="libs/weather-icons/css/weather-icons.min.css" />
 	<link rel="stylesheet" href="libs/weather-icons/css/weather-icons-wind.min.css" />
 </head>
 <body>
 	<div id="background"></div>
-	<div class="center">
+	<div class="center changeColor">
 		<div id="clock">
 			<h1>00:00:00</h1>
 			<h3 id="greetings"></h3>
 		</div>
 		<div id="search"><input type="search" placeholder="Google Search"/></div>
 	</div>
-	<div id="weather">
+	<div id="weather" class="changeColor">
 		<div id="temperature">
-			<span>-</span>
-			<span> | </span>
-			<i id="iWeather" class="wi "></i>
-		</div>
-		<div id="others">
-			<span></span> / <span></span>
+			<div id="tempnow" class="half">-</div>
+			<div id="summary" class="half">
+				<i id="iWeather" class="wi "></i>
+				<div id="others"></div>
+			</div>
 		</div>
 		<div id="location" class="">-</div>
 	</div>
+	<div id="miniweather" class="changeColor">
+		<i id="miniiWeather" class="wi "></i>
+		<span id="minitemp"></span>
+	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.waitforimages/1.5.0/jquery.waitforimages.min.js"></script>
+	<script src="js/background-check.min.js"></script>
 	<script src="js/script.js"></script>
 </body>
 </html>
