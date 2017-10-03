@@ -53,16 +53,33 @@ function getWeather() {
 					var data = JSON.parse(this.response);
 
 					console.log(data);
-					// Seteamos ciudad
-					document.getElementById("location").innerHTML = data.name;
-
-					document.getElementById("temperature").getElementsByTagName("span")[0].innerHTML = data.main.temp + "º"	;
-
 					
+					document.getElementById("location").innerHTML = data.name;
+					document.getElementById("temperature").getElementsByTagName("span")[0].innerHTML = data.main.temp + "º";
+					document.getElementById("others").getElementsByTagName("span")[0].innerHTML = data.main.temp_min + "º";
+					document.getElementById("others").getElementsByTagName("span")[1].innerHTML = data.main.temp_max + "º";
+					document.getElementById("iWeather").className += getWeatherIcon(data.weather[0].id);
 				}
 			};
 			xhttp.send();
 
 		});
 
+}
+
+
+function getWeatherIcon(id) {
+
+	var icons = [];
+
+	//https://openweathermap.org/weather-conditions
+	//https://erikflowers.github.io/weather-icons/
+
+	icons[200] = "wi-day-thunderstorm";
+	icons[800] = "wi-day-sunny";
+
+	if(icons[id] == undefined) {
+		return "wi-alien";
+	}
+	return icons[id];
 }
