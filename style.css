@@ -26,7 +26,7 @@ body {
 }
 
 #weather, #miniweather {
-	padding: 20px;
+	padding: 10px;
 	border-radius: 8px;
 	background-color: rgba(245, 245, 245, 0.7);
 	position: fixed;
@@ -71,7 +71,9 @@ body {
 	font-size: 6em;
 	margin-bottom: 10px;
 	margin-top: 0;
-	text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+	text-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
+	color: white;
+	letter-spacing: -5px;
 }
 
 #search input {

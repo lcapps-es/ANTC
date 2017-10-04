@@ -3,13 +3,6 @@ $(document).ready(function(){
 	changeBackground();
 	updateClock();
 
-	$('#search input').keypress(function(e) {
-		if(e.which == 13) {
-			e.preventDefault();
-			top.location = 'https://www.google.com/search?q='+$(this).val();
-		}
-	});
-
 	$('#weather, #miniweather').on('click', function(e){
 		$('#weather, #miniweather').toggle();
 	});
