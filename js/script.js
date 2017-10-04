@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+	if(typeof browser == 'undefined') {
+		var browser = chrome;
+	}
+
 	changeBackground();
 	updateClock();
 	updateGreetings();
