@@ -1,6 +1,8 @@
+var storageFields = ['username', 'location'];
+
 $(document).ready(function(){
 
-	changeBackground();
+	updateBackground();
 	updateClock();
 	updateGreetings();
 
@@ -8,10 +10,12 @@ $(document).ready(function(){
 		$('#weather, #miniweather').toggle();
 	});
 
-	getWeather();
+	updateWeather();
 });
 
-function changeBackground() {
+// ================ MAIN FUNCTIONS ================
+
+function updateBackground() {
 	$('#background').css('background-image', 'url("https://source.unsplash.com/category/nature/1920x1080")').waitForImages(function() {
 		$('#background').addClass('show');
 	}, $.noop, true);
@@ -33,19 +37,20 @@ function updateGreetings() {
 	var hour = now.getHours();
 	var message = '';
 	if(hour >= 5 && hour < 12) {
-		message = chrome.i18n.getMessage("greetingsMorning");
+		message = getTrad("greetingsMorning");
 	} else if(hour >= 12 && hour < 21) {
-		message = chrome.i18n.getMessage("greetingsAfternoon");
+		message = getTrad("greetingsAfternoon");
 	} else if(hour >= 21 || hour < 5) {
-		message = chrome.i18n.getMessage("greetingsEvening");
+		message = getTrad("greetingsEvening");
 	}
-	chrome.storage.local.get('username',function(data){
-		console.log(data);
+	getFromStorage('username',function(data){
 		if(!data || data.length > 0 || data.length === 0 || typeof data.username === 'undefined' || data.username == '') {
 			var input = $('<input />');
 			input.on('keydown', function(e){
 				if (e.keyCode == 13) {
-					saveName(this.value);
+					setInStorage('username', this.value, function(data){
+						updateGreetings();
+					});
 				}
 			});
 			$('#greetings').html(message+', ');
@@ -56,18 +61,7 @@ function updateGreetings() {
 	});
 }
 
-function getLocation(callback) {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function(position){
-			callback(position.coords);
-		});
-	} else {
-		console.info( "Geolocation is not supported by this chrome.");
-	}
-}
-
-
-function getWeather() {
+function updateWeather() {
 	var path = "https://api.openweathermap.org/data/2.5/weather?appid=45dc870e41c6c3980d4d1e446bf6d079&units=metric&lang=es";
 
 	getLocation(function(pos){		
@@ -89,12 +83,20 @@ function getWeather() {
 	});
 }
 
-function normalizeTemp(temp) {
-	return Math.round(temp * 10)/10 + "º";
+// ================ GETTERS ================
+
+function getLocation(callback) {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position){
+			callback(position.coords);
+		});
+	} else {
+		console.info( "Geolocation is not supported by this chrome.");
+	}
 }
 
 function getWeatherIcon(id) {
-
+	
 	var icons = [];
 
 	//https://openweathermap.org/weather-conditions
@@ -109,12 +111,34 @@ function getWeatherIcon(id) {
 	return icons[id];
 }
 
-function saveName(name) {
-	chrome.storage.local.set({'username': name}, function(data){
-		updateGreetings();
-	});
+function getFromStorage(field, callback) {
+	chrome.storage.local.get(field,callback);
+}
+
+function getTrad(key) {
+	return chrome.i18n.getMessage(key);
+}
+
+// ================ SETTERS ================
+
+function setInStorage(field, value, callback) {
+	var obj = {};
+	obj[field] = value;
+	chrome.storage.local.set(obj,callback);
+}
+
+// ================ UTIL ================
+
+function isInStorage(data, field) {
+	return data && data.length > 0 && typeof data[field] !== 'undefined' &&(data[field] != '' || data[field].length > 0);
+}
+
+function normalizeTemp(temp) {
+	return Math.round(temp * 10)/10 + "º";
 }
 
 function deleteAllStorage() {
-	chrome.storage.local.set({'username': ''});
+	storageFields.forEach(function(value, key){
+		chrome.storage.local.set({value: ''});
+	});
 }
