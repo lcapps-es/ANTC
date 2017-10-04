@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 	changeBackground();
 	updateClock();
+	updateGreetings();
 
 	$('#weather, #miniweather').on('click', function(e){
 		$('#weather, #miniweather').toggle();
@@ -27,6 +28,33 @@ function updateClock() {
     setTimeout(updateClock, 1000);
 }
 
+function updateGreetings() {
+	var now = new Date();
+	var hour = now.getHours();
+	var message = '';
+	if(hour >= 5 && hour < 12) {
+		message = browser.i18n.getMessage("greetingsMorning");
+	} else if(hour >= 12 && hour < 21) {
+		message = browser.i18n.getMessage("greetingsAfternoon");
+	} else if(hour >= 21 || hour < 5) {
+		message = browser.i18n.getMessage("greetingsEvening");
+	}
+	browser.storage.local.get('username').then(function(data){
+		console.log(data);
+		if(!data || data.length > 0 || data.length === 0 || typeof data.username === 'undefined') {
+			var input = $('<input />');
+			input.on('keydown', function(e){
+				if (e.keyCode == 13) {
+					saveName(this.value);
+				}
+			});
+			$('#greetings').html(message+', ');
+			$('#greetings').append(input);
+		} else {
+			$('#greetings').html(message+', '+data.username);
+		}
+	});
+}
 
 function getLocation(callback) {
 	if (navigator.geolocation) {
@@ -79,4 +107,14 @@ function getWeatherIcon(id) {
 		return "wi-alien";
 	}
 	return icons[id];
+}
+
+function saveName(name) {
+	browser.storage.local.set({'username': name}).then(function(data){
+		updateGreetings();
+	});
+}
+
+function deleteAllStorage() {
+	browser.storage.local.set({'username': undefined});
 }

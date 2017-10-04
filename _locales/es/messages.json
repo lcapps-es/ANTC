@@ -6,5 +6,23 @@
 	"extDesc": {
 		"message": "Awesome New Tab Customized", 
 		"description":"The description of the application, displayed in the web store."
+	},
+	"greetingsMorning": {
+		"message": "Buenos días, $NAME$",
+		"description": "Saludo de buenos días a un usuario",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "máquina"
+			}
+		}
+	},
+	"greetingsAfternoon": {
+		"message": "Buenas tardes",
+		"description": "Saludo de buenas tardes a un usuario"
+	},
+	"greetingsEvening": {
+		"message": "Buenas noches",
+		"description": "Saludo de buenas noches a un usuario"
 	}
 }
