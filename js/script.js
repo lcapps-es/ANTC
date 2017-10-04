@@ -110,7 +110,7 @@ function getWeatherIcon(id) {
 }
 
 function saveName(name) {
-	chrome.storage.local.set({'username': name}).then(function(data){
+	chrome.storage.local.set({'username': name}, function(data){
 		updateGreetings();
 	});
 }
