@@ -139,6 +139,6 @@ function normalizeTemp(temp) {
 
 function deleteAllStorage() {
 	storageFields.forEach(function(value, key){
-		chrome.storage.local.set({value: ''});
+		setInStorage(value, '');
 	});
 }
