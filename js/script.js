@@ -41,7 +41,7 @@ function updateGreetings() {
 	}
 	chrome.storage.local.get('username',function(data){
 		console.log(data);
-		if(!data || data.length > 0 || data.length === 0 || typeof data.username === 'undefined' || data.username != '') {
+		if(!data || data.length > 0 || data.length === 0 || typeof data.username === 'undefined' || data.username == '') {
 			var input = $('<input />');
 			input.on('keydown', function(e){
 				if (e.keyCode == 13) {
