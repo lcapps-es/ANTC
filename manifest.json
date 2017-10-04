@@ -15,7 +15,7 @@
   "chrome_url_overrides" : {
     "newtab": "index.html"
   },
-  "content_security_policy" : "default-src 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org ; style-src 'unsafe-inline' 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org ",
+  "content_security_policy" : "default-src 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org http://programmingexcuses.com/ ; style-src 'unsafe-inline' 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org http://programmingexcuses.com/ ",
   "optional_permissions": ["tabs","geolocation"],
   "permissions": ["geolocation", "storage"],
   "short_name": "__MSG_extName__"
