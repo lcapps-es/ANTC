@@ -1,10 +1,10 @@
 {
   "manifest_version": 2,
-  "name": "ANTC",
-  "version": "0.0.3",
+  "name": "__MSG_extName__",
+  "version": "0.0.4",
 
   "default_locale": "es",
-  "description": "Awesome New Tab Customized",
+  "description": "__MSG_extDesc__",
   "icons": {
     "128": "img/icon_128.jpg",
     "48": "img/icon_48.jpg",
@@ -18,5 +18,5 @@
   "content_security_policy" : "default-src 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org ; style-src 'unsafe-inline' 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org ",
   "optional_permissions": ["tabs","geolocation"],
   "permissions": ["geolocation"],
-  "short_name": "ANTC"
+  "short_name": "__MSG_extName__"
 }
