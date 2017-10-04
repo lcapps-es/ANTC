@@ -1,9 +1,5 @@
 $(document).ready(function(){
 
-	if(typeof browser == 'undefined') {
-		var browser = chrome;
-	}
-
 	changeBackground();
 	updateClock();
 	updateGreetings();
@@ -37,13 +33,13 @@ function updateGreetings() {
 	var hour = now.getHours();
 	var message = '';
 	if(hour >= 5 && hour < 12) {
-		message = browser.i18n.getMessage("greetingsMorning");
+		message = chrome.i18n.getMessage("greetingsMorning");
 	} else if(hour >= 12 && hour < 21) {
-		message = browser.i18n.getMessage("greetingsAfternoon");
+		message = chrome.i18n.getMessage("greetingsAfternoon");
 	} else if(hour >= 21 || hour < 5) {
-		message = browser.i18n.getMessage("greetingsEvening");
+		message = chrome.i18n.getMessage("greetingsEvening");
 	}
-	browser.storage.local.get('username').then(function(data){
+	chrome.storage.local.get('username').then(function(data){
 		console.log(data);
 		if(!data || data.length > 0 || data.length === 0 || typeof data.username === 'undefined') {
 			var input = $('<input />');
@@ -66,7 +62,7 @@ function getLocation(callback) {
 			callback(position.coords);
 		});
 	} else {
-		console.info( "Geolocation is not supported by this browser.");
+		console.info( "Geolocation is not supported by this chrome.");
 	}
 }
 
@@ -114,11 +110,11 @@ function getWeatherIcon(id) {
 }
 
 function saveName(name) {
-	browser.storage.local.set({'username': name}).then(function(data){
+	chrome.storage.local.set({'username': name}).then(function(data){
 		updateGreetings();
 	});
 }
 
 function deleteAllStorage() {
-	browser.storage.local.set({'username': undefined});
+	chrome.storage.local.set({'username': undefined});
 }
