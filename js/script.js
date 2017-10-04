@@ -23,7 +23,7 @@ function updateBackground() {
 
 function updateClock() {
     var now = new Date(); // current date
-	time = ("0" + now.getHours()).slice(-2) + ':' + ("0" + now.getMinutes()).slice(-2) + ':' + ("0" + now.getSeconds()).slice(-2);
+	time = ("0" + now.getHours()).slice(-2) + ' : ' + ("0" + now.getMinutes()).slice(-2) + ' : ' + ("0" + now.getSeconds()).slice(-2);
 
     // set the content of the element with the ID time to the formatted string
     $('#clock h1').html(time);
