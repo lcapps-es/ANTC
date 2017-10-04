@@ -23,7 +23,7 @@
   "incognito": "split",
   "offline_enabled": true,
   "optional_permissions": ["tabs","geolocation"],
-  "permissions": ["geolocation"],
+  "permissions": ["geolocation", "storage"],
   "short_name": "__MSG_extName__",
   "version_name": "Alpha 0.0.4"
 }

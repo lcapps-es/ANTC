@@ -16,7 +16,14 @@
     "newtab": "index.html"
   },
   "content_security_policy" : "default-src 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org ; style-src 'unsafe-inline' 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org ",
+  "current_locale": "es",
+  "externally_connectable": {
+    "matches": ["https://api.openweathermap.org/*", "https://*.unsplash.com/*"]
+  },
+  "incognito": "split",
+  "offline_enabled": true,
   "optional_permissions": ["tabs","geolocation"],
   "permissions": ["geolocation", "storage"],
-  "short_name": "__MSG_extName__"
+  "short_name": "__MSG_extName__",
+  "version_name": "Alpha 0.0.4"
 }
