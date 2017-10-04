@@ -39,7 +39,7 @@ function updateGreetings() {
 	} else if(hour >= 21 || hour < 5) {
 		message = chrome.i18n.getMessage("greetingsEvening");
 	}
-	chrome.storage.local.get('username').then(function(data){
+	chrome.storage.local.get('username',function(data){
 		console.log(data);
 		if(!data || data.length > 0 || data.length === 0 || typeof data.username === 'undefined') {
 			var input = $('<input />');
