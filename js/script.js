@@ -104,6 +104,7 @@ function getWeatherIcon(id) {
 
 	icons[200] = "wi-day-thunderstorm";
 	icons[800] = "wi-day-sunny";
+	icons[801] = "wi-day-cloudy";
 
 	if(icons[id] == undefined) {
 		return "wi-alien";
