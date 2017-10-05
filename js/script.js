@@ -16,9 +16,26 @@ $(document).ready(function(){
 // ================ MAIN FUNCTIONS ================
 
 function updateBackground() {
-	$('#background').css('background-image', 'url("https://source.unsplash.com/category/nature/1920x1080")').waitForImages(function() {
-		$('#background').addClass('show');
-	}, $.noop, true);
+	getFromStorage('background', function(data){
+		if(!data || data.length <= 0 || typeof data.background === 'undefined' || data.background == '' || data.background.length <= 0 || typeof data.background.img === 'undefined') {
+			var photo = new UnsplashPhoto();
+			var url = photo.fromCategory('nature').size(1920,1080).fetch();
+			console.log(url);
+			getBase64Image(url, function(base64img){
+				$('#background').css('background-image', 'url("'+base64img+'")').waitForImages(function() {
+					$('#background').addClass('show');
+			
+					cacheBackground(base64img);
+				}, $.noop, true);
+			});
+		} else {
+			var base64img = data.background.img;
+			console.log(base64img);
+			$('#background').css('background-image', 'url("'+base64img+'")').waitForImages(function() {
+				$('#background').addClass('show');
+			}, $.noop, true);
+		}
+	});
 }
 
 function updateClock() {
@@ -128,6 +145,11 @@ function setInStorage(field, value, callback) {
 	chrome.storage.local.set(obj,callback);
 }
 
+function cacheBackground(base64img) {
+	var now = new Date();
+	setInStorage('background', {img: base64img, timestamp: now.getTime()});
+}
+
 // ================ UTIL ================
 
 function isInStorage(data, field) {
@@ -139,7 +161,19 @@ function normalizeTemp(temp) {
 }
 
 function deleteAllStorage() {
-	storageFields.forEach(function(value, key){
-		setInStorage(value, '');
-	});
+	setInStorage('username', '');
+	setInStorage('background', {});
+}
+
+function getBase64Image(url, callback) {
+	var file = new File(url);
+	var reader = new FileReader();
+	reader.onload = function () {
+	  console.log(reader.result);
+	  callback(reader.result);
+	};
+	reader.onerror = function (error) {
+	  console.log('Error: ', error);
+	};
+	reader.readAsDataURL(file);
 }
