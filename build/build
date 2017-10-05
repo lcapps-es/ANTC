@@ -1,0 +1,3 @@
+#!/bin/bash
+name=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+zip -r ANTC-$name.zip .. -x "../build/*" "../.git/*" "../manifest-chrome.json" "../manifest-firefox.json" "../*.zip" "../README.md" "../.vscode/*"
