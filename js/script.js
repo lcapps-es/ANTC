@@ -48,7 +48,7 @@ function updateGreetings() {
 			var input = $('<input />');
 			input.on('keydown', function(e){
 				if (e.keyCode == 13) {
-					setInStorage('username', this.value, function(data){
+					setInStorage('username', this.value, function(setData){
 						updateGreetings();
 					});
 				}

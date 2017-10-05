@@ -8,14 +8,8 @@
 		"description":"The description of the application, displayed in the web store."
 	},
 	"greetingsMorning": {
-		"message": "Buenos días, $NAME$",
-		"description": "Saludo de buenos días a un usuario",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "máquina"
-			}
-		}
+		"message": "Buenos días",
+		"description": "Saludo de buenos días a un usuario"
 	},
 	"greetingsAfternoon": {
 		"message": "Buenas tardes",
