@@ -27,7 +27,7 @@ body {
 
 #weather, #miniweather {
 	padding: 10px;
-	border-radius: 8px;
+	border-radius: 4px;
 	background-color: rgba(245, 245, 245, 0.7);
 	position: fixed;
 	top: 25px;
@@ -47,7 +47,7 @@ body {
 }
 
 #miniweather {
-	padding: 5px;
+	padding: 5px 10px;
 }
 
 #summary {
@@ -115,4 +115,8 @@ body {
 #search input:focus {
 	width: 300px;
 	background-color: rgba(245, 245, 245, 0.7);
+}
+
+#cache, canvas {
+	display: none;
 }

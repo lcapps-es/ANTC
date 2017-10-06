@@ -18,21 +18,12 @@ $(document).ready(function(){
 function updateBackground() {
 	getFromStorage('background', function(data){
 		if(!data || data.length <= 0 || typeof data.background === 'undefined' || data.background == '' || data.background.length <= 0 || typeof data.background.img === 'undefined') {
-			var photo = new UnsplashPhoto();
-			var url = photo.fromCategory('nature').size(1920,1080).fetch();
-			console.log(url);
-			getBase64Image(url, function(base64img){
-				$('#background').css('background-image', 'url("'+base64img+'")').waitForImages(function() {
-					$('#background').addClass('show');
-			
-					cacheBackground(base64img);
-				}, $.noop, true);
-			});
+			cacheBackground(true);
 		} else {
-			var base64img = data.background.img;
-			console.log(base64img);
-			$('#background').css('background-image', 'url("'+base64img+'")').waitForImages(function() {
+			// Tengo fondo, se pone
+			$('#background').css('background-image', 'url("'+data.background.img+'")').waitForImages(function() {
 				$('#background').addClass('show');
+				cacheBackground(false);
 			}, $.noop, true);
 		}
 	});
@@ -145,9 +136,27 @@ function setInStorage(field, value, callback) {
 	chrome.storage.local.set(obj,callback);
 }
 
-function cacheBackground(base64img) {
-	var now = new Date();
-	setInStorage('background', {img: base64img, timestamp: now.getTime()});
+function cacheBackground(reload = false) {
+	var photo = new UnsplashPhoto();
+	var url = photo.fromCategory('nature').size(1920,1080).fetch();
+
+	var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        var reader = new FileReader();
+        reader.onloadend = function() {
+
+			var now = new Date();
+			setInStorage('background', {img: reader.result, timestamp: now.getTime()},function() {
+				if(reload) {
+					updateBackground();
+				}
+			});
+        }
+        reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
 }
 
 // ================ UTIL ================
@@ -165,15 +174,4 @@ function deleteAllStorage() {
 	setInStorage('background', {});
 }
 
-function getBase64Image(url, callback) {
-	var file = new File(url);
-	var reader = new FileReader();
-	reader.onload = function () {
-	  console.log(reader.result);
-	  callback(reader.result);
-	};
-	reader.onerror = function (error) {
-	  console.log('Error: ', error);
-	};
-	reader.readAsDataURL(file);
-}
+
