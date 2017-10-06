@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extName__",
-  "version": "0.0.6",
+  "version": "0.0.7",
 
   "default_locale": "es",
   "description": "__MSG_extDesc__",
@@ -15,14 +15,14 @@
   "chrome_url_overrides" : {
     "newtab": "index.html"
   },
-  "content_security_policy" : "default-src 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org http://programmingexcuses.com/ ; style-src 'unsafe-inline' 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org http://programmingexcuses.com/ ",  "current_locale": "es",
+  "content_security_policy" : "default-src 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org http://programmingexcuses.com/ ; img-src 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org http://programmingexcuses.com/ ; style-src 'unsafe-inline' 'self' data: https://source.unsplash.com https://images.unsplash.com https://api.openweathermap.org http://programmingexcuses.com/ ",  "current_locale": "es",
   "externally_connectable": {
     "matches": ["https://api.openweathermap.org/*", "https://*.unsplash.com/*", "http://*.programmingexcuses.com/*"]
   },
   "incognito": "split",
   "offline_enabled": true,
   "optional_permissions": ["tabs","geolocation"],
-  "permissions": ["geolocation", "storage"],
+  "permissions": ["geolocation", "storage", "unlimitedStorage"],
   "short_name": "__MSG_extName__",
-  "version_name": "Alpha 0.0.6"
+  "version_name": "Alpha 0.0.7"
 }
