@@ -11,13 +11,13 @@
 </head>
 <body>
 	<div id="background"></div>
-	<div class="center changeColor">
+	<div class="center">
 		<div id="clock">
 			<h1>00:00:00</h1>
 			<h2 id="greetings"></h2>
 		</div>
 	</div>
-	<div id="weather" class="changeColor">
+	<div id="weather">
 		<div id="temperature">
 			<div id="tempnow" class="half">-</div>
 			<div id="summary" class="half">
@@ -27,9 +27,20 @@
 		</div>
 		<div id="location" class="">-</div>
 	</div>
-	<div id="miniweather" class="changeColor">
+	<div id="miniweather">
 		<i id="miniiWeather" class="wi "></i>
 		<span id="minitemp"></span>
+	</div>
+	<div id="settingsButton">
+		<i class="material-icons">settings</i>
+	</div>
+	<div id="settings">
+		<i id="close-settings" class="material-icons">close</i>
+		<div class="content">
+			<h2>Weather</h2>
+			<p>Location: <input type="text" name="location"> </p>
+			<h5 id="deleteData">Borrar datos</h5>
+		</div>
 	</div>
 	<script src="libs/jquery-3.2.1.min.js"></script>
 	<script src="libs/jquery.waitforimages.min.js"></script>

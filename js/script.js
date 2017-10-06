@@ -1,30 +1,44 @@
-var storageFields = ['username', 'location'];
-
 $(document).ready(function(){
 
 	updateBackground();
 	updateClock();
 	updateGreetings();
-
+	updateWeather();
+	
 	$('#weather, #miniweather').on('click', function(e){
 		$('#weather, #miniweather').toggle();
 	});
-
-	updateWeather();
+	$('#settingsButton').on('click', function(e){
+		$('#settingsButton, #settings').toggle();
+	});
+	$('#close-settings').on('click', function(e){
+		$('#settingsButton, #settings').toggle();
+	});
+	$('input[name="location"]').on('keypress', function(e){
+		if(e.which == 13) {
+			setLocation($('input[name="location"]').val());
+		}
+	});
+	$('#deleteData').on('click', function(e){
+		var c = confirm('All data will be deleted. Do you wish to continue?');
+		if(c) {
+			deleteAllStorage();
+		}
+	});
 });
 
 // ================ MAIN FUNCTIONS ================
 
 function updateBackground() {
 	getFromStorage('background', function(data){
-		if(!data || data.length <= 0 || typeof data.background === 'undefined' || data.background == '' || data.background.length <= 0 || typeof data.background.img === 'undefined') {
-			cacheBackground(true);
-		} else {
+		if(isInStorage(data, 'background')) {
 			// Tengo fondo, se pone
 			$('#background').css('background-image', 'url("'+data.background.img+'")').waitForImages(function() {
 				$('#background').addClass('show');
 				cacheBackground(false);
 			}, $.noop, true);
+		} else {
+			cacheBackground(true);
 		}
 	});
 }
@@ -32,11 +46,7 @@ function updateBackground() {
 function updateClock() {
     var now = new Date(); // current date
 	time = ("0" + now.getHours()).slice(-2) + ' : ' + ("0" + now.getMinutes()).slice(-2) + ' : ' + ("0" + now.getSeconds()).slice(-2);
-
-    // set the content of the element with the ID time to the formatted string
     $('#clock h1').html(time);
-
-    // call this function again in 1000ms
     setTimeout(updateClock, 1000);
 }
 
@@ -52,7 +62,9 @@ function updateGreetings() {
 		message = getTrad("greetingsEvening");
 	}
 	getFromStorage('username',function(data){
-		if(!data || data.length > 0 || data.length === 0 || typeof data.username === 'undefined' || data.username == '') {
+		if(isInStorage(data, 'username')) {
+			$('#greetings').html(message+', '+data.username);
+		} else {
 			var input = $('<input />');
 			input.on('keydown', function(e){
 				if (e.keyCode == 13) {
@@ -63,8 +75,6 @@ function updateGreetings() {
 			});
 			$('#greetings').html(message+', ');
 			$('#greetings').append(input);
-		} else {
-			$('#greetings').html(message+', '+data.username);
 		}
 	});
 }
@@ -72,22 +82,34 @@ function updateGreetings() {
 function updateWeather() {
 	var path = "https://api.openweathermap.org/data/2.5/weather?appid=45dc870e41c6c3980d4d1e446bf6d079&units=metric&lang=es";
 
-	getLocation(function(pos){		
-		var url = path + "&lat=" + pos.latitude + "&lon=" + pos.longitude;
-		
-		$.get({
-			url: url,
-		}).done(function(response){
-			$('#location').text(response.name);
-			$('#tempnow').text(normalizeTemp(response.main.temp));
-			$('#others').text(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
-			$('#iWeather').addClass(getWeatherIcon(response.weather[0].id));
-			
-			$('#miniiWeather').addClass(getWeatherIcon(response.weather[0].id));
-			$('#minitemp').text(normalizeTemp(response.main.temp));
+	getFromStorage('location',function(data){
+		if(isInStorage(data, 'location')) {
+			$('input[name="location"]').val(data.location);
+			var url = path + '&q=' + data.location;
+			setHTMLWeather(url);
+		} else {
+			getLocation(function(pos){
+				var url = path + "&lat=" + pos.latitude + "&lon=" + pos.longitude;
+				setHTMLWeather(url);
+			});
+		}
+	});
+}
 
-			$('#miniweather').show();
-		});
+function setHTMLWeather(url) {
+	$.get({
+		url: url,
+	}).done(function(response){
+		$('#location').text(response.name);
+		$('#tempnow').text(normalizeTemp(response.main.temp));
+		$('#others').text(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
+		$('#iWeather').addClass(getWeatherIcon(response.weather[0].id));
+		
+		$('#miniiWeather').addClass(getWeatherIcon(response.weather[0].id));
+		$('#minitemp').text(normalizeTemp(response.main.temp));
+
+		$('#miniweather').show();
+		$('#weather').hide();
 	});
 }
 
@@ -159,10 +181,16 @@ function cacheBackground(reload = false) {
     xhr.send();
 }
 
+function setLocation(location) {
+	setInStorage('location', location, function(){
+		updateWeather();
+	});
+}
+
 // ================ UTIL ================
 
 function isInStorage(data, field) {
-	return data && data.length > 0 && typeof data[field] !== 'undefined' &&(data[field] != '' || data[field].length > 0);
+	return data && typeof data[field] !== 'undefined' && ((typeof data[field] == 'string' && data[field] != '') || (typeof data[field] == 'object' && !$.isEmptyObject(data[field])));
 }
 
 function normalizeTemp(temp) {
@@ -172,6 +200,5 @@ function normalizeTemp(temp) {
 function deleteAllStorage() {
 	setInStorage('username', '');
 	setInStorage('background', {});
+	setInStorage('location', '');
 }
-
-

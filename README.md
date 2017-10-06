@@ -7,3 +7,7 @@
   - About
  - Weather icons
  - Next event Google Calendar (not confirmed)
+
+## Changelog
+### Alpha 0.0.7
+ - Persistent Background
