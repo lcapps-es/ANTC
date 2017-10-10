@@ -3,7 +3,7 @@
 ## To-Do
  - Weather icons
  - Next event Google Calendar (not confirmed)
- - 
+ - Settings: add categories for background images
 
 ## Changelog
 ### Alpha 0.0.8
