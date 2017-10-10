@@ -53,7 +53,7 @@ input:focus {
 	text-align: center;
 	font-size: 1em;
 	display: none;
-	transition: display 1s easy-in-out;
+	transition: 1s easy-in-out;
 }
 
 #temperature {

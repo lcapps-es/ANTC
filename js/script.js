@@ -118,6 +118,11 @@ function setHTMLWeather(url) {
 		$('#tempnow').text(normalizeTemp(response.main.temp));
 		$('#others').text(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
 		$('#iWeather').addClass(getWeatherIcon(response.weather[0].id));
+		$('#humidity').text(response.main.humidity+" ");
+
+		$('#windSpeed > span').text(response.wind.speed);
+		var dir = getWindDirection(response.wind.deg);
+		$('#windSpeed > i').addClass("towards-"+dir+"-deg");
 		
 		$('#miniiWeather').addClass(getWeatherIcon(response.weather[0].id));
 		$('#minitemp').text(normalizeTemp(response.main.temp));
@@ -225,4 +230,9 @@ function updateTrads() {
 		var trad = getTrad($(this).attr("trad"));
 		$(this).text(trad);
 	});
+}
+
+function getWindDirection(value) {
+	var t = Math.ceil(value / (45/2));
+	return ((Math.ceil(t / 2) * 23) + (Math.floor(t / 2) * 22));
 }
