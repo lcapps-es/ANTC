@@ -34,5 +34,9 @@
 	"newTab": {
 		"message": "Nueva Pestaña",
 		"description": "Titulo de la nueva pestaña en el navegador"
+	},
+	"viewWeatherExtend": {
+		"message": "Mostrar el Tiempo desplegado",
+		"description": ""
 	}
 }

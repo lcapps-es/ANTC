@@ -38,6 +38,9 @@ $(document).ready(function(){
 	console.log(author + " ~ " + version)
 	$("#footer").html(author + " ~ " + version);
 
+	$("#settings input[type='checkbox']").click(function(){		
+		setInStorage($(this).attr('name'), $(this).is(":checked"));
+	});
 
 });
 
@@ -91,6 +94,14 @@ function updateGreetings() {
 			$('#greetings').append(input);
 		}
 	});
+
+	getFromStorage('extendWeather',function(data){
+		if(data.extendWeather !== undefined && data.extendWeather === true) {
+			$("#settings input[name='extendWeather']").click();
+		}
+	});
+
+	
 }
 
 function updateWeather() {
@@ -127,8 +138,15 @@ function setHTMLWeather(url) {
 		$('#miniiWeather').addClass(getWeatherIcon(response.weather[0].id));
 		$('#minitemp').text(normalizeTemp(response.main.temp));
 
-		$('#miniweather').show();
-		$('#weather').hide();
+		getFromStorage('extendWeather',function(data){
+			if(data.extendWeather !== undefined && data.extendWeather === true) {
+				$('#weather').show();
+				$('#miniweather').hide();
+			} else {
+				$('#miniweather').show();
+				$('#weather').hide();
+			}
+		});
 	});
 }
 
