@@ -1,5 +1,6 @@
 body {
 	font-family: 'Noto Sans', sans-serif;
+	cursor: default;
 }
 
 input {
@@ -132,15 +133,15 @@ input:focus {
 }
 
 #settings {
-	display: none;
 	position: absolute;
-	left: 0;
+	left: calc(0px - 25% - 40px);
 	top: 0;
 	bottom: 0;
 	background-color: rgba(245, 245, 245, 0.7);
 	width: 25%;
 	z-index: 100;
 	padding: 20px;
+	transition: all 0.3s ease-out;
 }
 
 #settings i {

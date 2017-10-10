@@ -10,10 +10,15 @@ $(document).ready(function(){
 		$('#weather, #miniweather').toggle();
 	});
 	$('#settingsButton').on('click', function(e){
-		$('#settingsButton, #settings').toggle();
+		$(this).hide();
+		$('#settings').css('left', 0);
 	});
 	$('#close-settings').on('click', function(e){
-		$('#settingsButton, #settings').toggle();
+		$('#settings').css('left', '').on('transitionend', function(){
+			if(parseInt($('#settings').css('left')) < 0) {
+				$('#settingsButton').show();
+			}
+		});
 	});
 	$('input[name="location"]').on('keypress', function(e){
 		if(e.which == 13) {
