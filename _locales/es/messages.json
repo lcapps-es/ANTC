@@ -18,5 +18,21 @@
 	"greetingsEvening": {
 		"message": "Buenas noches",
 		"description": "Saludo de buenas noches a un usuario"
+	},
+	"weather": {
+		"message": "Tiempo",
+		"description": ""
+	},
+	"location": {
+		"message": "Localización",
+		"description": ""
+	},
+	"cleanData": {
+		"message": "Borrar Datos",
+		"description": ""
+	},
+	"newTab": {
+		"message": "Nueva Pestaña",
+		"description": "Titulo de la nueva pestaña en el navegador"
 	}
 }

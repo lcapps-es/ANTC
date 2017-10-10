@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	updateTrads();
 	updateBackground();
 	updateClock();
 	updateGreetings();
@@ -25,6 +26,14 @@ $(document).ready(function(){
 			deleteAllStorage();
 		}
 	});
+
+	// SETTINGS
+	var author = chrome.app.getDetails().author;
+	var version = chrome.app.getDetails().version_name;
+	console.log(author + " ~ " + version)
+	$("#footer").html(author + " ~ " + version);
+
+
 });
 
 // ================ MAIN FUNCTIONS ================
@@ -201,4 +210,14 @@ function deleteAllStorage() {
 	setInStorage('username', '');
 	setInStorage('background', {});
 	setInStorage('location', '');
+}
+
+function updateTrads() {
+	var trads = $.find("[trad]");
+	$( $.find("[trad]")).each(function(){
+		console.log(this, $(this).attr("trad"));
+
+		var trad = getTrad($(this).attr("trad"));
+		$(this).text(trad);
+	});
 }

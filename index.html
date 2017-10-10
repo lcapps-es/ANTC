@@ -3,7 +3,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>New Tab</title>
+	<title trad="newTab">New Tab</title>
 	<link rel="stylesheet" href="libs/weather-icons/css/weather-icons.min.css" />
 	<link rel="stylesheet" href="libs/weather-icons/css/weather-icons-wind.min.css" />
 	<link rel="stylesheet" href="fonts/stylesheet.css">
@@ -16,7 +16,7 @@
 			<h1>00:00:00</h1>
 			<h2 id="greetings"></h2>
 		</div>
-	</div>
+	</div>	
 	<div id="weather">
 		<div id="temperature">
 			<div id="tempnow" class="half">-</div>
@@ -37,10 +37,11 @@
 	<div id="settings">
 		<i id="close-settings" class="material-icons">close</i>
 		<div class="content">
-			<h2>Weather</h2>
-			<p>Location: <input type="text" name="location"> </p>
-			<h5 id="deleteData">Borrar datos</h5>
+			<h2 trad="weather"></h2>
+			<p><span trad="location"></span>: <input type="text" name="location"> </p>
+			<h5 trad="cleanData" id="deleteData">Clean</h5>
 		</div>
+		<div id="footer"></div>
 	</div>
 	<script src="libs/jquery-3.2.1.min.js"></script>
 	<script src="libs/jquery.waitforimages.min.js"></script>
