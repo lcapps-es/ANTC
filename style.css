@@ -183,3 +183,7 @@ input:focus {
 .rotate:hover {
 	transform: rotate(90deg);
 }
+
+#otherData > div {
+	float: left;
+}
