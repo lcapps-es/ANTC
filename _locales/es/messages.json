@@ -19,8 +19,8 @@
 		"message": "Buenas noches",
 		"description": "Saludo de buenas noches a un usuario"
 	},
-	"weather": {
-		"message": "Tiempo",
+	"settings": {
+		"message": "Configuración",
 		"description": ""
 	},
 	"location": {
@@ -37,6 +37,10 @@
 	},
 	"viewWeatherExtend": {
 		"message": "Mostrar el Tiempo desplegado",
+		"description": ""
+	},
+	"name": {
+		"message": "Nombre",
 		"description": ""
 	}
 }

@@ -68,9 +68,12 @@ input[type='text']:focus {
 	padding: 5px 10px;
 }
 
+#tempnow {
+	border-right: 3px solid black;
+}
+
 #summary {
 	font-size: .4em;
-	border-left: 3px solid black;
 }
 
 .center {
@@ -184,8 +187,8 @@ input[type='text']:focus {
 	transform: rotate(90deg);
 }
 
-#otherData > div {
-	float: left;
+#otherData {
+	display: flex;
 }
 
 #settings input[type="checkbox"] {

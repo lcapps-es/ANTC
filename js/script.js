@@ -22,8 +22,11 @@ $(document).ready(function(){
 	});
 	$('input[name="location"]').on('keypress', function(e){
 		if(e.which == 13) {
-			setLocation($('input[name="location"]').val());
+			setLocation(this.value);
 		}
+	});
+	$('input[name="name"]').on('keydown', function(e){
+		changeName(e, this.value)
 	});
 	$('#deleteData').on('click', function(e){
 		var c = confirm('All data will be deleted. Do you wish to continue?');
@@ -31,17 +34,29 @@ $(document).ready(function(){
 			deleteAllStorage();
 		}
 	});
-
-	// SETTINGS
-	var author = chrome.app.getDetails().author;
-	var version = chrome.app.getDetails().version_name;
-	console.log(author + " ~ " + version)
-	$("#footer").html(author + " ~ " + version);
-
 	$("#settings input[type='checkbox']").click(function(){		
 		setInStorage($(this).attr('name'), $(this).is(":checked"));
 	});
 
+	// SETTINGS
+	if(typeof chrome.app != 'undefined') {
+		var author = chrome.app.getDetails().author;
+		var version = chrome.app.getDetails().version_name;
+		$("#footer").html(author + " ~ " + version);
+	}
+
+});
+
+$(document).mouseup(function(e) 
+{
+    var container = $("#weather");
+
+	// if the target of the click isn't the container nor a descendant of the container
+    if (!$("#weather").is(e.target) && $("#weather").has(e.target).length === 0 && $("#weather").is(':visible')) {
+        $("#weather").click();
+    } else if(!$("#settings").is(e.target) && $("#settings").has(e.target).length === 0 && parseInt($("#settings").css('left')) == 0) {
+		$('#close-settings').click();
+	}
 });
 
 // ================ MAIN FUNCTIONS ================
@@ -81,17 +96,15 @@ function updateGreetings() {
 	getFromStorage('username',function(data){
 		if(isInStorage(data, 'username')) {
 			$('#greetings').html(message+', '+data.username);
+			$('input[name="name"]').val(data.username);
 		} else {
 			var input = $('<input />');
 			input.on('keydown', function(e){
-				if (e.keyCode == 13) {
-					setInStorage('username', this.value, function(setData){
-						updateGreetings();
-					});
-				}
+				changeName(e, this.value)
 			});
 			$('#greetings').html(message+', ');
 			$('#greetings').append(input);
+			$('input[name="name"]').val('');
 		}
 	});
 
@@ -224,6 +237,14 @@ function setLocation(location) {
 	});
 }
 
+function changeName(e, value) {
+	if (e.keyCode == 13) {
+		setInStorage('username', value, function(setData){
+			updateGreetings();
+		});
+	}
+}
+
 // ================ UTIL ================
 
 function isInStorage(data, field) {
@@ -231,13 +252,14 @@ function isInStorage(data, field) {
 }
 
 function normalizeTemp(temp) {
-	return Math.round(temp * 10)/10 + "º";
+	return Math.round((temp * 10)/10) + "º";
 }
 
 function deleteAllStorage() {
 	setInStorage('username', '');
 	setInStorage('background', {});
 	setInStorage('location', '');
+	location.reload();
 }
 
 function updateTrads() {
