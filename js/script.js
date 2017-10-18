@@ -186,6 +186,8 @@ function getWeatherIcon(id) {
 
 	icons[200] = "wi-storm-showers";
 	icons[211] = "wi-thunderstorm";
+	icons[300] = "wi-hail";
+	icons[500] = "wi-hail";
 	icons[501] = "wi-hail";
 	icons[520] = "wi-hail";
 	icons[521] = "wi-rain";
