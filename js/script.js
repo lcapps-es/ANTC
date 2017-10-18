@@ -140,15 +140,14 @@ function setHTMLWeather(url) {
 	}).done(function(response){
 		$('#location').text(response.name);
 		$('#tempnow').text(normalizeTemp(response.main.temp));
-		$('#others').text(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
+		$('#others').prepend(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
 		response.weather.forEach(function(value, key){
 			console.info("Weather: "+value.description+" ("+value.id+")");
 			$('#summary').prepend('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
 			$('#miniweather').prepend('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
 		});
-		$('#humidity').text(response.main.humidity+" ");
-
-		$('#windSpeed > span').text(response.wind.speed);
+		$('#humValue').text(response.main.humidity+" ");
+		$('#windValue').text(response.wind.speed);
 		var dir = getWindDirection(response.wind.deg);
 		$('#windSpeed > i').addClass("towards-"+dir+"-deg");
 		
@@ -187,6 +186,7 @@ function getWeatherIcon(id) {
 
 	icons[200] = "wi-storm-showers";
 	icons[211] = "wi-thunderstorm";
+	icons[501] = "wi-hail";
 	icons[520] = "wi-hail";
 	icons[521] = "wi-rain";
 	icons[522] = "wi-rain";
