@@ -138,6 +138,7 @@ function setHTMLWeather(url) {
 	$.get({
 		url: url,
 	}).done(function(response){
+		console.info("Weather: "+response.weather[0].description+" ("+response.weather[0].id+")");
 		$('#location').text(response.name);
 		$('#tempnow').text(normalizeTemp(response.main.temp));
 		$('#others').text(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
@@ -182,9 +183,12 @@ function getWeatherIcon(id) {
 	//https://openweathermap.org/weather-conditions
 	//https://erikflowers.github.io/weather-icons/
 
-	icons[200] = "wi-day-thunderstorm";
-	icons[800] = "wi-day-sunny";
-	icons[801] = "wi-day-cloudy";
+	icons[200] = "wi-thunderstorm";
+	icons[520] = "wi-hail";
+	icons[521] = "wi-rain";
+	icons[522] = "wi-rain";
+	icons[800] = "wi-sunny";
+	icons[801] = "wi-cloudy";
 
 	if(icons[id] == undefined) {
 		return "wi-alien";
@@ -265,8 +269,6 @@ function deleteAllStorage() {
 function updateTrads() {
 	var trads = $.find("[trad]");
 	$( $.find("[trad]")).each(function(){
-		console.log(this, $(this).attr("trad"));
-
 		var trad = getTrad($(this).attr("trad"));
 		$(this).text(trad);
 	});
