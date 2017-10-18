@@ -138,18 +138,20 @@ function setHTMLWeather(url) {
 	$.get({
 		url: url,
 	}).done(function(response){
-		console.info("Weather: "+response.weather[0].description+" ("+response.weather[0].id+")");
 		$('#location').text(response.name);
 		$('#tempnow').text(normalizeTemp(response.main.temp));
 		$('#others').text(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
-		$('#iWeather').addClass(getWeatherIcon(response.weather[0].id));
+		response.weather.forEach(function(value, key){
+			console.info("Weather: "+value.description+" ("+value.id+")");
+			$('#summary').prepend('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
+			$('#miniweather').prepend('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
+		});
 		$('#humidity').text(response.main.humidity+" ");
 
 		$('#windSpeed > span').text(response.wind.speed);
 		var dir = getWindDirection(response.wind.deg);
 		$('#windSpeed > i').addClass("towards-"+dir+"-deg");
 		
-		$('#miniiWeather').addClass(getWeatherIcon(response.weather[0].id));
 		$('#minitemp').text(normalizeTemp(response.main.temp));
 
 		getFromStorage('extendWeather',function(data){
@@ -183,7 +185,8 @@ function getWeatherIcon(id) {
 	//https://openweathermap.org/weather-conditions
 	//https://erikflowers.github.io/weather-icons/
 
-	icons[200] = "wi-thunderstorm";
+	icons[200] = "wi-storm-showers";
+	icons[211] = "wi-thunderstorm";
 	icons[520] = "wi-hail";
 	icons[521] = "wi-rain";
 	icons[522] = "wi-rain";
