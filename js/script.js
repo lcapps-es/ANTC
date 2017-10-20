@@ -187,20 +187,43 @@ function getWeatherIcon(id) {
 	//https://erikflowers.github.io/weather-icons/
 
 	icons[200] = "wi-storm-showers";
+	icons[210] = "wi-thunderstorm";
 	icons[211] = "wi-thunderstorm";
+	icons[212] = "wi-thunderstorm";
+
 	icons[300] = "wi-hail";
+
 	icons[500] = "wi-hail";
-	icons[501] = "wi-hail";
-	icons[520] = "wi-hail";
+	icons[520] = "wi-rain";
 	icons[521] = "wi-rain";
 	icons[522] = "wi-rain";
-	icons[701] = "wi-fog";
-	icons[741] = "wi-fog";
+	icons[531] = "wi-rain";
+
+	icons[600] = "wi-snow";
+
+	icons[700] = "wi-fog";
+
 	icons[800] = "wi-sunny";
 	icons[801] = "wi-cloudy";
+	icons[802] = "wi-cloudy";
+	icons[803] = "wi-cloudy";
+	icons[804] = "wi-cloudy";
+
+	icons[900] = "wi-tornado";
+	icons[901] = "wi-night-alt-rain";
+	icons[902] = "wi-hurricane";
+	icons[903] = "wi-snowflake-cold";
+	icons[904] = "wi-hot";
+	icons[905] = "wi-windy";
+	icons[906] = "wi-hail";
 
 	if(icons[id] == undefined) {
-		return "wi-alien";
+		var generic = parseInt(id.toString().charAt(0)+'00');
+		if(icons[generic] == undefined) {
+			return "wi-alien";
+		} else {
+			return icons[generic];
+		}
 	}
 	return icons[id];
 }
