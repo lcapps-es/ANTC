@@ -194,3 +194,25 @@ input[type='text']:focus {
 #settings input[type="checkbox"] {
 	vertical-align: sub;
 }
+
+#linkparent {
+	position: absolute;
+	display: table;
+	bottom: 25px;
+	left: 5%;
+	right: 5%;
+	margin: 0 auto;
+}
+
+#linkbar {
+	/*display: none;*/
+	height: 40px;
+	border-radius: 6px;
+	background-color: rgba(245, 245, 245, 0.7);
+	text-align: center;
+}
+
+#linkbar a img {
+	height: 70%;
+	padding: 5px;
+}

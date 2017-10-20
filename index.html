@@ -16,7 +16,7 @@
 			<h1>00:00:00</h1>
 			<h2 id="greetings"></h2>
 		</div>
-	</div>	
+	</div>
 	<div id="weather">
 		<div id="temperature">
 			<div id="tempnow" class="half"></div>
@@ -39,6 +39,7 @@
 	<div id="miniweather">
 		<span id="minitemp"></span>
 	</div>
+	<div id="linkparent"><div id="linkbar"></div></div>
 	<div id="settingsButton" class="rotateOnHover">
 		<i class="material-icons rotate">settings</i>
 	</div>
@@ -49,6 +50,13 @@
 			<p><span trad="location"></span>: <input type="text" name="location"> </p>
 			<p><span trad="name"></span>: <input type="text" name="name"> </p>
 			<p><span trad="viewWeatherExtend"></span> <input type="checkbox" name="extendWeather" /></p>
+			<div id="linkSettings">
+				<span trad="viewLinks"></span>
+				<div id="linkList"></div>
+				<input type="text" name="newLinkUrl" />
+				<input type="text" name="newLinkImg" />
+			</div>
+			<p><span trad="viewLinks"></span> <input type="checkbox" name="extendWeather" /></p>
 			<h5 trad="cleanData" id="deleteData">Clean</h5>
 		</div>
 		<div id="footer"></div>
@@ -56,6 +64,7 @@
 	<script src="libs/jquery-3.2.1.min.js"></script>
 	<script src="libs/jquery.waitforimages.min.js"></script>
 	<script src="libs/unsplash-source.min.js"></script>
+	<script src="libs/favicon.js"></script>
 	<script src="js/script.js"></script>
 </body>
 </html>

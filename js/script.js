@@ -5,6 +5,7 @@ $(document).ready(function(){
 	updateClock();
 	updateGreetings();
 	updateWeather();
+	updateLinks();
 	
 	$('#weather, #miniweather').on('click', function(e){
 		$('#weather, #miniweather').toggle();
@@ -36,6 +37,11 @@ $(document).ready(function(){
 	});
 	$("#settings input[type='checkbox']").click(function(){		
 		setInStorage($(this).attr('name'), $(this).is(":checked"));
+	});
+	$('input[name="newLinkUrl"],input[name="newLinkImg"]').on('keypress', function(e){
+		if(e.which == 13) {
+			setLink($('input[name="newLinkUrl"]').val(), $('input[name="newLinkImg"]').val());
+		}
 	});
 
 	// SETTINGS
@@ -167,6 +173,22 @@ function setHTMLWeather(url) {
 	});
 }
 
+function updateLinks() {
+	$('#linkbar').html('');
+	getFromStorage('links',function(data){
+		if(isInStorage(data, 'links')) {
+			data.links.forEach(function(value, key){
+				if(typeof value.img == 'undefined' || value.img == '') {
+					$('#linkbar').append('<a href="'+value.link+'"><img src="https://icons.better-idea.org/icon?size=64&url='+value.link+'" /></a>');
+				} else {
+					$('#linkbar').append('<a href="'+value.link+'"><img src="'+value.img+'" /></a>');
+				}
+			});
+			//$('#linkbar').show();
+		}
+	});
+}
+
 // ================ GETTERS ================
 
 function getLocation(callback) {
@@ -281,6 +303,22 @@ function changeName(e, value) {
 	}
 }
 
+function setLink(link, img) {
+	getFromStorage('links',function(data){
+		if(!isInStorage(data, 'links')) {
+			data.links = [];
+		}
+		if(link.indexOf('http://') != 0) {
+			link = 'http://'+link;
+		}
+		data.links.push({link: link, img: img});
+		setInStorage('links', data.links, function(){
+			updateLinks();
+			alert('Saved!');
+		});
+	});
+}
+
 // ================ UTIL ================
 
 function isInStorage(data, field) {
@@ -295,6 +333,7 @@ function deleteAllStorage() {
 	setInStorage('username', '');
 	setInStorage('background', {});
 	setInStorage('location', '');
+	setInStorage('links', []);
 	location.reload();
 }
 
