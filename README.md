@@ -8,11 +8,7 @@ ANTC is a Firefox and Chrome Extension to change your new tab page to a personal
  - Welcome message
 
 ## To-Do
- - Next event Google Calendar (not confirmed)
- - Settings: add categories for background images
- - API for Finances
- - To-Do List
- - Change API for Unsplash backgrounds
+Check issues for the to-dos
 
 ## Changelog
 ### Alpha 0.0.12
@@ -28,4 +24,4 @@ ANTC is a Firefox and Chrome Extension to change your new tab page to a personal
  - Persistent Background
 
 ## Authors
-This extension is made with love from Adrián Mora and Álvaro Téllez. If you see any feature that could be on the extension, please open an issue with the tag 'enhancement' and we will consider implementing it.
+This extension is made with love from Adrián Mora and Álvaro Téllez. If you see any feature that could be on the extension, please open an issue with the tag 'enhancement' and we will consider implementing it. Also, if you feel like doing it by yourself, fork our repo and implement it! We will be glad to check your code :D
