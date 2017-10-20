@@ -1,4 +1,11 @@
 #!/bin/bash
 cd ..
-name=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
-zip -r build/ANTC-$name.zip . -x "build/*" ".git/*" "manifest-chrome.json" "manifest-firefox.json" "*.zip" "README.md" ".vscode/*"
+name=$1
+if [ -f manifest-$1.json ]
+then
+	cp manifest-$1.json manifest.json
+	zip -r build/ANTC-$name.zip . -x "build/*" ".git/*" "manifest-chrome.json" "manifest-firefox.json" "*.zip" "README.md" ".vscode/*"
+	rm manifest.json
+else
+	echo "No existe ese manifest: "$name
+fi
