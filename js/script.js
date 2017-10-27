@@ -22,9 +22,7 @@ $(document).ready(function(){
 		});
 	});
 	$('input[name="location"]').on('keypress', function(e){
-		if(e.which == 13) {
-			setLocation(this.value);
-		}
+		setLocation(this.value);
 	});
 	$('input[name="name"]').on('keydown', function(e){
 		changeName(e, this.value)
@@ -41,6 +39,7 @@ $(document).ready(function(){
 	$('input[name="newLinkUrl"],input[name="newLinkImg"]').on('keypress', function(e){
 		if(e.which == 13) {
 			setLink($('input[name="newLinkUrl"]').val(), $('input[name="newLinkImg"]').val());
+			$('input[name="newLinkUrl"],input[name="newLinkImg"]').val('');
 		}
 	});
 
@@ -175,16 +174,49 @@ function setHTMLWeather(url) {
 
 function updateLinks() {
 	$('#linkbar').html('');
+	$('#linkList').html('');
 	getFromStorage('links',function(data){
 		if(isInStorage(data, 'links')) {
 			data.links.forEach(function(value, key){
 				if(typeof value.img == 'undefined' || value.img == '') {
-					$('#linkbar').append('<a href="'+value.link+'"><img src="https://icons.better-idea.org/icon?size=64&url='+value.link+'" /></a>');
+					var a = $('<a>');
+					a.prop('href', value.link);
+					var img = $('<img>');
+					img.prop('src', 'https://icons.better-idea.org/icon?size=64&url='+value.link);
+					a.append(img);
+					$('#linkbar').append(a);
 				} else {
-					$('#linkbar').append('<a href="'+value.link+'"><img src="'+value.img+'" /></a>');
+					var a = $('<a>');
+					a.prop('href', value.link);
+					var img = $('<img>');
+					img.prop('src', value.img);
+					a.append(img);
+					$('#linkbar').append(a);
 				}
+				var save = $('<i class="material-icons" data-key="'+key+'">save</i>');
+				save.on('click', function(e){
+					setLink($('input[name="linkUrl'+$(this).data('key')+'"]').val(), $('input[name="linkImg'+$(this).data('key')+'"]').val(), $(this).data('key'));
+				});
+				var close = $('<i class="material-icons" data-key="'+key+'">close</i>');
+				close.on('click', function(e){
+					deleteLink($(this).data('key'));
+				});
+				var p = $('<p>');
+				var inputUrl = $('<input>');
+				inputUrl.prop('name', 'linkUrl'+key);
+				inputUrl.prop('type', 'text');
+				inputUrl.val(value.link);
+				var inputImg = $('<input>');
+				inputImg.prop('name', 'linkImg'+key);
+				inputImg.prop('type', 'text');
+				inputImg.val(value.img);
+				p.append(inputUrl);
+				p.append(' ');
+				p.append(inputImg);
+				p.append(save);
+				p.append(close);
+				$('#linkList').append(p);
 			});
-			//$('#linkbar').show();
 		}
 	});
 }
@@ -202,11 +234,10 @@ function getLocation(callback) {
 }
 
 function getWeatherIcon(id) {
-	
-	var icons = [];
-
 	//https://openweathermap.org/weather-conditions
 	//https://erikflowers.github.io/weather-icons/
+	
+	var icons = [];
 
 	icons[200] = "wi-storm-showers";
 	icons[210] = "wi-thunderstorm";
@@ -225,7 +256,7 @@ function getWeatherIcon(id) {
 
 	icons[700] = "wi-fog";
 
-	icons[800] = "wi-sunny";
+	icons[800] = "wi-day-sunny";
 	icons[801] = "wi-cloudy";
 	icons[802] = "wi-cloudy";
 	icons[803] = "wi-cloudy";
@@ -246,8 +277,9 @@ function getWeatherIcon(id) {
 		} else {
 			return icons[generic];
 		}
+	} else {
+		return icons[id];
 	}
-	return icons[id];
 }
 
 function getFromStorage(field, callback) {
@@ -290,9 +322,11 @@ function cacheBackground(reload = false) {
 }
 
 function setLocation(location) {
-	setInStorage('location', location, function(){
-		updateWeather();
-	});
+	if(e.which == 13) {
+		setInStorage('location', location, function(){
+			updateWeather();
+		});
+	}
 }
 
 function changeName(e, value) {
@@ -303,18 +337,41 @@ function changeName(e, value) {
 	}
 }
 
-function setLink(link, img) {
+function setLink(link, img, key) {
 	getFromStorage('links',function(data){
+		console.log(1, data);
+		console.log('huha', key);
 		if(!isInStorage(data, 'links')) {
 			data.links = [];
 		}
 		if(link.indexOf('http://') != 0) {
 			link = 'http://'+link;
 		}
-		data.links.push({link: link, img: img});
+		if(typeof key != 'undefined') {
+			console.log('old', data.links[key]);
+			data.links[key] = {link: link, img: img};
+			console.log('new', data.links[key]);
+		} else {
+			data.links.push({link: link, img: img});
+		}
+		console.log('guardo', data.links);
 		setInStorage('links', data.links, function(){
 			updateLinks();
 			alert('Saved!');
+		});
+	});
+}
+
+function deleteLink(key) {
+	getFromStorage('links',function(data){
+		if(!isInStorage(data, 'links')) {
+			data.links = [];
+		}
+		if(typeof data.links[key] != 'undefined') {
+			delete data.links[key];
+		}
+		setInStorage('links', data.links, function(){
+			updateLinks();
 		});
 	});
 }
