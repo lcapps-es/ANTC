@@ -22,7 +22,7 @@ $(document).ready(function(){
 		});
 	});
 	$('input[name="location"]').on('keypress', function(e){
-		setLocation(this.value);
+		setLocation(e, this.value);
 	});
 	$('input[name="name"]').on('keydown', function(e){
 		changeName(e, this.value)
@@ -36,10 +36,10 @@ $(document).ready(function(){
 	$("#settings input[type='checkbox']").click(function(){		
 		setInStorage($(this).attr('name'), $(this).is(":checked"));
 	});
-	$('input[name="newLinkUrl"],input[name="newLinkImg"]').on('keypress', function(e){
+	$('input[name="newLinkUrl"]').on('keypress', function(e){
 		if(e.which == 13) {
-			setLink($('input[name="newLinkUrl"]').val(), $('input[name="newLinkImg"]').val());
-			$('input[name="newLinkUrl"],input[name="newLinkImg"]').val('');
+			setLink($('input[name="newLinkUrl"]').val());
+			$('input[name="newLinkUrl"]').val('');
 		}
 	});
 
@@ -145,12 +145,12 @@ function setHTMLWeather(url) {
 	}).done(function(response){
 		$('#location').text(response.name);
 		$('#tempnow').text(normalizeTemp(response.main.temp));
-		$('#others').prepend(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
+		$('#others').text(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
 		response.weather.forEach(function(value, key){
 			console.info("Weather: "+value.description+" ("+value.id+")");
 			if($("i."+getWeatherIcon(value.id)).length == 0) {
-				$('#summary').prepend('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
-				$('#miniweather').prepend('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
+				$('#sumicon').html('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
+				$('#miniicon').html('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
 			}
 		});
 		$('#humValue').text(response.main.humidity+" ");
@@ -177,45 +177,34 @@ function updateLinks() {
 	$('#linkList').html('');
 	getFromStorage('links',function(data){
 		if(isInStorage(data, 'links')) {
+			console.log(data);
 			data.links.forEach(function(value, key){
-				if(typeof value.img == 'undefined' || value.img == '') {
+				if(value) {
 					var a = $('<a>');
 					a.prop('href', value.link);
 					var img = $('<img>');
 					img.prop('src', 'https://icons.better-idea.org/icon?size=64&url='+value.link);
 					a.append(img);
 					$('#linkbar').append(a);
-				} else {
-					var a = $('<a>');
-					a.prop('href', value.link);
-					var img = $('<img>');
-					img.prop('src', value.img);
-					a.append(img);
-					$('#linkbar').append(a);
+					var save = $('<i class="material-icons" data-key="'+key+'">save</i>');
+					save.on('click', function(e){
+						setLink($('input[name="linkUrl'+$(this).data('key')+'"]').val(), $(this).data('key'));
+					});
+					var close = $('<i class="material-icons" data-key="'+key+'">close</i>');
+					close.on('click', function(e){
+						deleteLink($(this).data('key'));
+					});
+					var p = $('<p>');
+					var inputUrl = $('<input>');
+					inputUrl.prop('name', 'linkUrl'+key);
+					inputUrl.prop('type', 'text');
+					inputUrl.val(value.link);
+					p.append(inputUrl);
+					p.append(' ');
+					p.append(save);
+					p.append(close);
+					$('#linkList').append(p);
 				}
-				var save = $('<i class="material-icons" data-key="'+key+'">save</i>');
-				save.on('click', function(e){
-					setLink($('input[name="linkUrl'+$(this).data('key')+'"]').val(), $('input[name="linkImg'+$(this).data('key')+'"]').val(), $(this).data('key'));
-				});
-				var close = $('<i class="material-icons" data-key="'+key+'">close</i>');
-				close.on('click', function(e){
-					deleteLink($(this).data('key'));
-				});
-				var p = $('<p>');
-				var inputUrl = $('<input>');
-				inputUrl.prop('name', 'linkUrl'+key);
-				inputUrl.prop('type', 'text');
-				inputUrl.val(value.link);
-				var inputImg = $('<input>');
-				inputImg.prop('name', 'linkImg'+key);
-				inputImg.prop('type', 'text');
-				inputImg.val(value.img);
-				p.append(inputUrl);
-				p.append(' ');
-				p.append(inputImg);
-				p.append(save);
-				p.append(close);
-				$('#linkList').append(p);
 			});
 		}
 	});
@@ -321,7 +310,7 @@ function cacheBackground(reload = false) {
     xhr.send();
 }
 
-function setLocation(location) {
+function setLocation(e, location) {
 	if(e.which == 13) {
 		setInStorage('location', location, function(){
 			updateWeather();
@@ -337,10 +326,8 @@ function changeName(e, value) {
 	}
 }
 
-function setLink(link, img, key) {
+function setLink(link, key) {
 	getFromStorage('links',function(data){
-		console.log(1, data);
-		console.log('huha', key);
 		if(!isInStorage(data, 'links')) {
 			data.links = [];
 		}
@@ -348,16 +335,12 @@ function setLink(link, img, key) {
 			link = 'http://'+link;
 		}
 		if(typeof key != 'undefined') {
-			console.log('old', data.links[key]);
-			data.links[key] = {link: link, img: img};
-			console.log('new', data.links[key]);
+			data.links[key] = {link: link};
 		} else {
-			data.links.push({link: link, img: img});
+			data.links.push({link: link});
 		}
-		console.log('guardo', data.links);
 		setInStorage('links', data.links, function(){
 			updateLinks();
-			alert('Saved!');
 		});
 	});
 }

@@ -197,11 +197,13 @@ input[type='text']:focus {
 
 #linkparent {
 	position: absolute;
-	display: table;
+	display: flex;
 	bottom: 25px;
 	left: 5%;
 	right: 5%;
 	margin: 0 auto;
+    align-items: center;
+    justify-content: center;
 }
 
 #linkbar {
