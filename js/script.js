@@ -5,6 +5,7 @@ $(document).ready(function(){
 	updateClock();
 	updateGreetings();
 	updateWeather();
+	updateLinks();
 	
 	$('#weather, #miniweather').on('click', function(e){
 		$('#weather, #miniweather').toggle();
@@ -21,9 +22,7 @@ $(document).ready(function(){
 		});
 	});
 	$('input[name="location"]').on('keypress', function(e){
-		if(e.which == 13) {
-			setLocation(this.value);
-		}
+		setLocation(e, this.value);
 	});
 	$('input[name="name"]').on('keydown', function(e){
 		changeName(e, this.value)
@@ -36,6 +35,12 @@ $(document).ready(function(){
 	});
 	$("#settings input[type='checkbox']").click(function(){		
 		setInStorage($(this).attr('name'), $(this).is(":checked"));
+	});
+	$('input[name="newLinkUrl"]').on('keypress', function(e){
+		if(e.which == 13) {
+			setLink($('input[name="newLinkUrl"]').val());
+			$('input[name="newLinkUrl"]').val('');
+		}
 	});
 
 	// SETTINGS
@@ -140,12 +145,12 @@ function setHTMLWeather(url) {
 	}).done(function(response){
 		$('#location').text(response.name);
 		$('#tempnow').text(normalizeTemp(response.main.temp));
-		$('#others').prepend(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
+		$('#others').text(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
 		response.weather.forEach(function(value, key){
 			console.info("Weather: "+value.description+" ("+value.id+")");
 			if($("i."+getWeatherIcon(value.id)).length == 0) {
-				$('#summary').prepend('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
-				$('#miniweather').prepend('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
+				$('#sumicon').html('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
+				$('#miniicon').html('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
 			}
 		});
 		$('#humValue').text(response.main.humidity+" ");
@@ -167,6 +172,44 @@ function setHTMLWeather(url) {
 	});
 }
 
+function updateLinks() {
+	$('#linkbar').html('');
+	$('#linkList').html('');
+	getFromStorage('links',function(data){
+		if(isInStorage(data, 'links')) {
+			console.log(data);
+			data.links.forEach(function(value, key){
+				if(value) {
+					var a = $('<a>');
+					a.prop('href', value.link);
+					var img = $('<img>');
+					img.prop('src', 'https://icons.better-idea.org/icon?size=64&url='+value.link);
+					a.append(img);
+					$('#linkbar').append(a);
+					var save = $('<i class="material-icons" data-key="'+key+'">save</i>');
+					save.on('click', function(e){
+						setLink($('input[name="linkUrl'+$(this).data('key')+'"]').val(), $(this).data('key'));
+					});
+					var close = $('<i class="material-icons" data-key="'+key+'">close</i>');
+					close.on('click', function(e){
+						deleteLink($(this).data('key'));
+					});
+					var p = $('<p>');
+					var inputUrl = $('<input>');
+					inputUrl.prop('name', 'linkUrl'+key);
+					inputUrl.prop('type', 'text');
+					inputUrl.val(value.link);
+					p.append(inputUrl);
+					p.append(' ');
+					p.append(save);
+					p.append(close);
+					$('#linkList').append(p);
+				}
+			});
+		}
+	});
+}
+
 // ================ GETTERS ================
 
 function getLocation(callback) {
@@ -180,11 +223,10 @@ function getLocation(callback) {
 }
 
 function getWeatherIcon(id) {
-	
-	var icons = [];
-
 	//https://openweathermap.org/weather-conditions
 	//https://erikflowers.github.io/weather-icons/
+	
+	var icons = [];
 
 	icons[200] = "wi-storm-showers";
 	icons[210] = "wi-thunderstorm";
@@ -203,7 +245,7 @@ function getWeatherIcon(id) {
 
 	icons[700] = "wi-fog";
 
-	icons[800] = "wi-sunny";
+	icons[800] = "wi-day-sunny";
 	icons[801] = "wi-cloudy";
 	icons[802] = "wi-cloudy";
 	icons[803] = "wi-cloudy";
@@ -224,8 +266,9 @@ function getWeatherIcon(id) {
 		} else {
 			return icons[generic];
 		}
+	} else {
+		return icons[id];
 	}
-	return icons[id];
 }
 
 function getFromStorage(field, callback) {
@@ -267,10 +310,12 @@ function cacheBackground(reload = false) {
     xhr.send();
 }
 
-function setLocation(location) {
-	setInStorage('location', location, function(){
-		updateWeather();
-	});
+function setLocation(e, location) {
+	if(e.which == 13) {
+		setInStorage('location', location, function(){
+			updateWeather();
+		});
+	}
 }
 
 function changeName(e, value) {
@@ -279,6 +324,39 @@ function changeName(e, value) {
 			updateGreetings();
 		});
 	}
+}
+
+function setLink(link, key) {
+	getFromStorage('links',function(data){
+		if(!isInStorage(data, 'links')) {
+			data.links = [];
+		}
+		if(link.indexOf('http://') != 0) {
+			link = 'http://'+link;
+		}
+		if(typeof key != 'undefined') {
+			data.links[key] = {link: link};
+		} else {
+			data.links.push({link: link});
+		}
+		setInStorage('links', data.links, function(){
+			updateLinks();
+		});
+	});
+}
+
+function deleteLink(key) {
+	getFromStorage('links',function(data){
+		if(!isInStorage(data, 'links')) {
+			data.links = [];
+		}
+		if(typeof data.links[key] != 'undefined') {
+			delete data.links[key];
+		}
+		setInStorage('links', data.links, function(){
+			updateLinks();
+		});
+	});
 }
 
 // ================ UTIL ================
@@ -295,6 +373,7 @@ function deleteAllStorage() {
 	setInStorage('username', '');
 	setInStorage('background', {});
 	setInStorage('location', '');
+	setInStorage('links', []);
 	location.reload();
 }
 

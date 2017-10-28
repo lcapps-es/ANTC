@@ -42,5 +42,9 @@
 	"name": {
 		"message": "Nombre",
 		"description": ""
+	},
+	"viewLinks": {
+		"message": "Accesos Directos",
+		"description": ""
 	}
 }
