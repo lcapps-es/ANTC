@@ -6,11 +6,15 @@ ANTC is a Firefox and Chrome Extension to change your new tab page to a personal
  - Weather
  - Random background
  - Welcome message
+ - Link bar for shortcuts
 
 ## To-Do
 Check issues for the to-dos
 
 ## Changelog
+### Alpha 0.1.0
+ - Link shortcuts
+ - Bugfixes
 ### Alpha 0.0.12
  - Intelligent weather icons - no more hardcoding (only a little bit)
 ### Alpha 0.0.11
