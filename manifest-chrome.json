@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extName__",
-  "version": "0.1.0",
+  "version": "0.1.1",
 
   "default_locale": "es",
   "description": "__MSG_extDesc__",
@@ -25,5 +25,5 @@
   "optional_permissions": ["tabs","geolocation"],
   "permissions": ["geolocation", "storage", "unlimitedStorage"],
   "short_name": "__MSG_extName__",
-  "version_name": "Alpha 0.1.0"
+  "version_name": "Alpha 0.1.1"
 }

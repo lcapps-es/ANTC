@@ -12,6 +12,8 @@ ANTC is a Firefox and Chrome Extension to change your new tab page to a personal
 Check issues for the to-dos
 
 ## Changelog
+### Alpha 0.1.1
+ - Fix #9
 ### Alpha 0.1.0
  - Link shortcuts
  - Bugfixes
