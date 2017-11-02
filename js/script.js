@@ -331,7 +331,7 @@ function setLink(link, key) {
 		if(!isInStorage(data, 'links')) {
 			data.links = [];
 		}
-		if(link.indexOf('http://') != 0) {
+		if(link.indexOf('http://') != 0 && link.indexOf('https://') != 0) {
 			link = 'http://'+link;
 		}
 		if(typeof key != 'undefined') {
