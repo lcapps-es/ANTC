@@ -48,7 +48,7 @@ input[type='text']:focus {
 	border-radius: 4px;
 	background-color: rgba(245, 245, 245, 0.7);
 	position: absolute;
-	top: 25px;
+	top: 80px;
 	right: 25px;
 	text-align: center;
 	font-size: 1em;
@@ -129,7 +129,7 @@ input[type='text']:focus {
 	padding: 10px;
 	border-radius: 4px;
 	position: absolute;
-	top: 25px;
+	top: 80px;
 	left: 25px;
 	font-size: 1em;
 	background-color: rgba(245, 245, 245, 0.7);
@@ -220,7 +220,7 @@ input[type='text']:focus {
 
 .marquee {
 	display: none;
-	width: 80vw;
+	width: calc(100% - 35px);
 	margin: 25px auto;
 	background-color: rgba(245, 245, 245, 0.7);
 	border-radius: 4px;
@@ -237,7 +237,7 @@ input[type='text']:focus {
 
 .marquee p img, .marquee p i {
 	margin-right: 8px;
-	margin-left: 15px;
+	margin-left: 50px;
 	vertical-align: middle;
 	max-height: 20px;
 }
