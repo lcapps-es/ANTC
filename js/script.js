@@ -284,6 +284,7 @@ function getNews( rss, img = null) {
 			api_key: "oogqwcfxocr0aisyxknad6erosucxt3kprkwsmhn"
 		}
 /*
+//https://antc-rss-json.herokuapp.com/?rss
 		url: "https://adrianmora.me/rss.php",
 		data : {
 			rss: rss
