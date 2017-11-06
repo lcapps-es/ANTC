@@ -15,10 +15,10 @@
   "chrome_url_overrides" : {
     "newtab": "index.html"
   },
-  "content_security_policy" : "default-src 'self' data: https://api.openweathermap.org/ https://source.unsplash.com/ https://images.unsplash.com/ ; img-src 'self' data: https: http: ; style-src 'unsafe-inline' 'self' data: https: http: ",
+  "content_security_policy" : "default-src 'self' data: https://api.openweathermap.org/ https://source.unsplash.com/ https://images.unsplash.com/ https://adrianmora.me https://api.rss2json.com ; img-src 'self' data: https: http: ; style-src 'unsafe-inline' 'self' data: https: http: ",
   "current_locale": "es",
   "externally_connectable": {
-    "matches": ["https://api.openweathermap.org/*", "https://*.unsplash.com/*", "http://*.programmingexcuses.com/*"]
+    "matches": ["https://api.openweathermap.org/*", "https://*.unsplash.com/*", "http://*.programmingexcuses.com/*", "https://api.rss2json.com/*", "https://adrianmora.me/*"]
   },
   "incognito": "split",
   "offline_enabled": true,

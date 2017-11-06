@@ -217,3 +217,45 @@ input[type='text']:focus {
 	height: 70%;
 	padding: 5px;
 }
+
+.marquee {
+	display: none;
+	width: 80vw;
+	margin: 25px auto;
+	background-color: rgba(245, 245, 245, 0.7);
+	border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+	box-sizing: border-box;
+}
+.marquee p {
+	display: inline-block;
+	padding: 0px 20px;
+    padding-left: 100%;
+    animation: marquee 80s linear infinite;
+}
+
+.marquee p img, .marquee p i {
+	margin-right: 8px;
+	margin-left: 15px;
+	vertical-align: middle;
+	max-height: 20px;
+}
+
+.marquee:hover p {
+
+	-moz-animation-play-state: paused;
+	-webkit-animation-play-state: paused;
+	animation-play-state: paused;
+}
+
+.marquee p a {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+@keyframes marquee {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
