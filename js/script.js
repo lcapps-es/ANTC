@@ -200,7 +200,7 @@ function updateLinks() {
 					var a = $('<a>');
 					a.prop('href', value.link);
 					var img = $('<img>');
-					img.prop('src', 'https://icons.better-idea.org/icon?size=64&url='+value.link);
+					img.prop('src', 'https://icons.better-idea.org/icon?size=16..64..128&url='+value.link);
 					a.append(img);
 					$('#linkbar').append(a);
 					var save = $('<i class="material-icons" data-key="'+key+'">save</i>');
