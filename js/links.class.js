@@ -1,0 +1,3 @@
+class Links extends Base {
+	
+}

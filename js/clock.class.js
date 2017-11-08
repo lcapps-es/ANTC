@@ -1,0 +1,4 @@
+class Clock extends Base {
+
+}
+	
