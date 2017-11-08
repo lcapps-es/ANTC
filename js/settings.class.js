@@ -12,6 +12,8 @@ class Settings extends Base {
 			$("#footer").html(author + " ~ " + version);
 		}
 
+		this.setEvents();
+
 	}
 
 
