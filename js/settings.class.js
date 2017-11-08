@@ -56,7 +56,7 @@ class Settings extends Base {
 
 		$('input[name="newLinkUrl"]').on('keypress', function(e){
 			if(e.which == 13) {
-				setLink($('input[name="newLinkUrl"]').val());
+				top.app.factories.links.setLink($('input[name="newLinkUrl"]').val());
 				$('input[name="newLinkUrl"]').val('');
 			}
 		});
