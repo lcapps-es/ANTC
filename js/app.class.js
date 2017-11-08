@@ -8,6 +8,8 @@ class App extends Base {
 		this.factories.settings = new Settings();
 		this.factories.weather = new Weather();
 
+		this.updateTrads();
+
 		this.updateClock();
 		this.updateGreetings();
 		this.updateBackground();
@@ -102,10 +104,24 @@ class App extends Base {
 	}
 
 	setEvents() {
+
 		var self = this;
+		
 		$('input[name="name"]').on('keydown', function(e){
-			self.factories.settings.changeName(e, this.value, self.updateGreetings.bind(self));
+			self.factories.settings.changeName(e, this.value, self.updateBackground.bind(self))
 		});
+		
+		$(document).mouseup(function(e) {
+			var container = $("#weather");
+		
+			// if the target of the click isn't the container nor a descendant of the container
+			if (!$("#weather").is(e.target) && $("#weather").has(e.target).length === 0 && $("#weather").is(':visible')) {
+				$("#weather").click();
+			} else if(!$("#settings").is(e.target) && $("#settings").has(e.target).length === 0 && parseInt($("#settings").css('left')) == 0) {
+				$('#close-settings').click();
+			}
+		});
+		
 	}
 
 }

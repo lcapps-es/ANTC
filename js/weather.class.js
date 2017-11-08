@@ -4,6 +4,8 @@ class Weather extends Base {
 		super();
 
 		this.updateWeather();
+
+		this.setEvents();
 	}
 	
 
@@ -28,28 +30,28 @@ class Weather extends Base {
 
 	setHTMLWeather(url) {
 		let self = this;
-		
+
 		$.get({
 			url: url,
 		}).done(function(response){
 			$('#location').text(response.name);
-			$('#tempnow').text(normalizeTemp(response.main.temp));
-			$('#others').text(normalizeTemp(response.main.temp_min)+' / '+normalizeTemp(response.main.temp_max));
+			$('#tempnow').text(self.normalizeTemp(response.main.temp));
+			$('#others').text(self.normalizeTemp(response.main.temp_min)+' / '+self.normalizeTemp(response.main.temp_max));
 			response.weather.forEach(function(value, key){
 				console.info("Weather: "+value.description+" ("+value.id+")");
-				if($("i."+getWeatherIcon(value.id)).length == 0) {
-					$('#sumicon').html('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
-					$('#miniicon').html('<i class="wi '+getWeatherIcon(value.id)+'"></i>');
+				if($("i."+self.getWeatherIcon(value.id)).length == 0) {
+					$('#sumicon').html('<i class="wi '+self.getWeatherIcon(value.id)+'"></i>');
+					$('#miniicon').html('<i class="wi '+self.getWeatherIcon(value.id)+'"></i>');
 				}
 			});
 			$('#humValue').text(response.main.humidity+" ");
 			$('#windValue').text(response.wind.speed);
-			var dir = getWindDirection(response.wind.deg);
+			var dir = self.getWindDirection(response.wind.deg);
 			$('#windSpeed > i').addClass("towards-"+dir+"-deg");
 			
-			$('#minitemp').text(normalizeTemp(response.main.temp));
+			$('#minitemp').text(self.normalizeTemp(response.main.temp));
 	
-			getFromStorage('extendWeather',function(data){
+			self.getFromStorage('extendWeather',function(data){
 				if(data.extendWeather !== undefined && data.extendWeather === true) {
 					$('#weather').show();
 					$('#miniweather').hide();
@@ -63,9 +65,11 @@ class Weather extends Base {
 	
 
 	setLocation(e, location) {
+		let self = this;
+
 		if(e.which == 13) {
-			setInStorage('location', location, function(){
-				updateWeather();
+			this.setInStorage('location', location, function(){
+				self.updateWeather();
 			});
 		}
 	}
@@ -138,6 +142,18 @@ class Weather extends Base {
 
 	normalizeTemp(temp) {
 		return Math.round((temp * 10)/10) + "º";
+	}
+
+	setEvents() {
+		let self = this;
+
+		$('#weather, #miniweather').on('click', function(e){
+			$('#weather, #miniweather').toggle();
+		});
+
+		$('input[name="location"]').on('keypress', function(e){
+			self.setLocation(e, this.value);
+		});
 	}
 
 
