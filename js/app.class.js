@@ -7,6 +7,7 @@ class App extends Base {
 		this.factories = {};
 		this.factories.settings = new Settings();
 		this.factories.weather = new Weather();
+		this.factories.links = new Links();
 
 		this.updateClock();
 		this.updateGreetings();
@@ -113,8 +114,6 @@ class App extends Base {
 
 
 $(document).ready(function(){
-	var app = new App();
-	//app.deleteAllStorage();	
+	top.app = new App();
+	//app.deleteAllStorage();
 });
-
-	
