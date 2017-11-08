@@ -109,7 +109,8 @@ class App extends Base {
 		var self = this;
 		
 		$('input[name="name"]').on('keydown', function(e){
-			self.factories.settings.changeName(e, this.value, self.updateBackground.bind(self))
+			console.log("PASO");
+			self.factories.settings.changeName(e, this.value, self.updateGreetings.bind(self))
 		});
 		
 		$(document).mouseup(function(e) {
