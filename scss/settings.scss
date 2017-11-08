@@ -1,0 +1,57 @@
+#settingsButton {
+	padding: 10px;
+	border-radius: 4px;
+	position: absolute;
+	top: 80px;
+	left: 25px;
+	font-size: 1em;
+	background-color: rgba(245, 245, 245, 0.7);
+}
+
+#settings {
+	position: absolute;
+	left: calc(0px - 25% - 40px);
+	top: 0;
+	bottom: 0;
+	background-color: rgba(245, 245, 245, 0.7);
+	width: 25%;
+	z-index: 100;
+	padding: 20px;
+	transition: all 0.3s ease-out;
+}
+
+#settings i#close-settings {
+	float: right;
+}
+
+#settings h2 {
+	margin-bottom: 10px;
+	margin-top: 0;
+}
+
+#settings input[type='text'] {
+	width: 100px;
+	border-bottom: 2px solid rgba(19, 19, 19, 0.7);
+}
+
+#settings input[type='text']:focus {
+	color: #000;
+	width: 200px;
+}
+#settings .content {
+	height: calc(100vh - 40px);
+}
+
+#settings h5 {
+	cursor: pointer;
+}
+
+
+#settings #footer {
+	bottom: 0px;
+	text-align: center;
+}
+
+#settings input[type="checkbox"] {
+	vertical-align: sub;
+}

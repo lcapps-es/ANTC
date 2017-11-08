@@ -1,0 +1,36 @@
+#weather, #miniweather {
+	padding: 10px;
+	border-radius: 4px;
+	background-color: rgba(245, 245, 245, 0.7);
+	position: absolute;
+	top: 80px;
+	right: 25px;
+	text-align: center;
+	font-size: 1em;
+	display: none;
+	transition: 1s easy-in-out;
+}
+
+#temperature {
+	font-size: 3em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 6em;
+}
+
+#miniweather {
+	padding: 5px 10px;
+}
+
+#tempnow {
+	border-right: 3px solid black;
+}
+
+#summary {
+	font-size: .4em;
+}
+
+#otherData {
+	display: flex;
+}

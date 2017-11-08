@@ -1,0 +1,22 @@
+#linkparent {
+	position: absolute;
+	display: flex;
+	bottom: 25px;
+	left: 5%;
+	right: 5%;
+	margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+#linkbar {
+	height: 40px;
+	border-radius: 6px;
+	background-color: rgba(245, 245, 245, 0.7);
+	text-align: center;
+}
+
+#linkbar a img {
+	height: 70%;
+	padding: 5px;
+}
