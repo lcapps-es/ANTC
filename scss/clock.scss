@@ -1,32 +1,33 @@
 #clock {
 	text-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
 	color: white;
-}
 
-#clock * {
-	margin-bottom: 10px;
-	margin-top: 0;
-}
+	* {
+		margin-bottom: 10px;
+		margin-top: 0;
+	}
 
-#clock h1 {
-	font-size: 7em;
-	letter-spacing: -5px;
-}
+	h1 {
+		font-size: 7em;
+		letter-spacing: -5px;
+	}
 
-#clock #greetings, #clock input {
-	font-size: 3em;
-	font-family: "Ubuntu", serif;
-	font-weight: 300;
-}
+	#greetings, input {
+		font-size: 3em;
+		font-family: "Ubuntu", serif;
+		font-weight: 300;
+	}
 
-#clock input {
-	color: white;
-	background-color: transparent;
-	border: 0;
-	border-bottom: 2px solid white;
-	width: 200px;
-	font-size: 50px;
-	margin: 0;
-	padding: 0;
-	text-align: center;
+	input {
+		color: white;
+		background-color: transparent;
+		border: 0;
+		border-bottom: 2px solid white;
+		width: 200px;
+		font-size: 50px;
+		margin: 0;
+		padding: 0;
+		text-align: center;
+
+	}
 }

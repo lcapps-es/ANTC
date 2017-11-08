@@ -2,3 +2,4 @@ manifest.json
 build/*.zip
 node_modules/
 app.min.js.map
+.vscode/

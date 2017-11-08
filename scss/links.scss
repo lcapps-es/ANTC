@@ -12,11 +12,13 @@
 #linkbar {
 	height: 40px;
 	border-radius: 6px;
-	background-color: rgba(245, 245, 245, 0.7);
+	background-color: $bckColor;
 	text-align: center;
-}
 
-#linkbar a img {
-	height: 70%;
-	padding: 5px;
+	a {
+		img {
+			height: 70%;
+			padding: 5px;
+		}
+	}
 }
