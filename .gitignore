@@ -1,2 +1,3 @@
 manifest.json
 build/*.zip
+node_modules/
