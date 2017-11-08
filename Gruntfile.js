@@ -4,7 +4,18 @@ module.exports = function(grunt) {
 	require('time-grunt')(grunt);
 
 	var public = "./public/";
+	var zipFiles = ['**', '!build*/**', '!.vscode/**', '!js/**', '!node_modules/**', '!scss/**', '!Gruntfile.js', '!LICENSE', '!manifest-*.json', '!package*.json', '!README.md', '!*.zip'];
 
+	var modifyJSON = function(file, key, value) {
+        if (!grunt.file.exists(file)) {
+            grunt.log.error("file " + file + " not found");
+            return true; //return false to abort the execution
+        }
+        var project = grunt.file.readJSON(file); //get file as json object
+
+        project[key] = value;
+        grunt.file.write(file, JSON.stringify(project, null, 2));
+	};
 	
 	// Project configuration.
 	grunt.initConfig({
@@ -63,17 +74,62 @@ module.exports = function(grunt) {
 			js : {
 				src : [ './unificator.class.js' ]
 			},
-		}
+		},
 
+		copy: {
+			chrome: {
+				src: ['manifest-chrome.json'],
+				dest: 'manifest.json'
+			},
+			firefox: {
+				src: ['manifest-firefox.json'],
+				dest: 'manifest.json'
+			}
+		},
+
+		zip: {
+			chrome: {
+				src: zipFiles,
+				dest: 'ANTC-chrome-'+grunt.option('ver')+'.zip',
+			},
+			firefox: {
+				src: zipFiles,
+				dest: 'ANTC-firefox-'+grunt.option('ver')+'.zip',
+			},
+		}
 
 	});
 	
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-sass');
+	grunt.loadNpmTasks('grunt-zip');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 
 	grunt.registerTask('default', [ 'sass', 'js' ]);
-	grunt.registerTask('dev', [ 'default', 'watch' ]);
+	grunt.registerTask('deploy', [ 'sass', 'js', 'version', 'prepareZip' ]);
+	grunt.registerTask('devChrome', [ 'default', 'copy:chrome', 'watch' ]);
+	grunt.registerTask('devFirefox', [ 'default', 'copy:firefox', 'watch' ]);
 	grunt.registerTask('js', [ 'concat:js', 'babel', 'clean:js' ]);
+
+	grunt.registerTask('version', function(){
+		var version = grunt.option('ver');
+		if(typeof version == 'undefined') {
+			grunt.fail.fatal('No version provided (ver parameter)');
+		}
+		if(!/[0-9]+\.[0-9]+\.[0-9]+/.test(version)) {
+			grunt.fail.fatal('Not a valid version');
+		}
+		modifyJSON('package.json', 'version', grunt.option('ver'));
+		modifyJSON('manifest-chrome.json', 'version', grunt.option('ver'));
+		modifyJSON('manifest-chrome.json', 'version_name', "Alpha "+grunt.option('ver'));
+		modifyJSON('manifest-firefox.json', 'version', grunt.option('ver'));
+	});
+
+	grunt.registerTask('prepareZip', function(){
+		grunt.task.run(['copy:chrome', 'zip:chrome']);
+		grunt.task.run(['copy:firefox', 'zip:firefox']);
+	});
 
 };
 	

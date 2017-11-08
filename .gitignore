@@ -1,5 +1,5 @@
 manifest.json
-build/*.zip
+*.zip
 node_modules/
 app.min.js.map
 .vscode/
