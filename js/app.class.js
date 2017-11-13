@@ -54,14 +54,7 @@ class App extends Base {
 				$('#greetings').append(input);
 				$('input[name="name"]').val('');
 			}
-		});
-	
-		this.getFromStorage('extendWeather',function(data){
-			if(data.extendWeather !== undefined && data.extendWeather === true) {
-				$("#settings input[name='extendWeather']").click();
-			}
-		});
-		
+		});	
 	}
 
 

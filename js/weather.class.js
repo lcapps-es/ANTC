@@ -25,6 +25,12 @@ class Weather extends Base {
 				});
 			}
 		});
+		
+		this.getFromStorage('extendWeather',function(data){
+			if(data.extendWeather !== undefined && data.extendWeather === true) {
+				$("#settings input[name='extendWeather']").click();
+			}
+		});	
 	}
 
 
