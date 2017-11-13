@@ -1,9 +1,7 @@
 class Base {
 
 	constructor() {
-
 	}
-	
 
 	setInStorage(field, value, callback) {
 		var obj = {};

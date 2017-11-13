@@ -14,20 +14,23 @@ class News extends Base {
 		this.currentRss = 0;
 		this.loopPrint = 0;
 		this.flagCall = true;
+
+		this.loadNewsSource();
+		this.updateNews();
 	}
 
 	loadNewsSource() {
 		var self = this;
 		$(this.newsSource).each(function(elem){
-			$("p#news").next("ul").append("<li><input class='news' type='checkbox' name='news[]' key='"+this.key+"' value='"+this.key+"' /> "+this.name+"</li>");
+			$("ul#newsList").append("<li><input class='news' type='checkbox' name='news[]' key='"+this.key+"' value='"+this.key+"' /> "+this.name+"</li>");
 		});
-	
+
 		this.getFromStorage('news', function(data){
 			if(self.isInStorage(data, 'news')) {
 				$(data.news).each(function(elem){
 					$("input[key="+this+"]").prop('checked', true);
 				});
-			}	
+			}
 		});
 
 		$("input.news").change(function() {
@@ -36,13 +39,14 @@ class News extends Base {
 				n.push($(this).val());
 			});
 	
-			self.setInStorage("news", n, function(){
-				self.updateNews();
+			top.app.factories.news.setInStorage("news", n, function(){
+				top.app.factories.news.updateNews();
 			});
 		});
 	}
 
 	getNews( rss, key, img = null) {
+		var self = this;
 		$.get({
 			
 			url: "https://api.rss2json.com/v1/api.json",
@@ -57,14 +61,14 @@ class News extends Base {
 		}).done(function(response){
 			console.log(rss, response);
 			
-			currentRss++;
+			self.currentRss++;
 	
 			if(response != undefined && response.status != undefined && response.status == "ok" && response.items != undefined) {
 				var max = 10;
 				$(".marquee").show();
 	
 				for(var i = 0; i < response.items.length && i < max; i++ ) {
-					var icon = (img == null) ? "<i class='material-icons'>sms_failed</i>" : "<img src='../img/news/"+img+"' />";
+					var icon = (img == null) ? "<i class='material-icons'>sms_failed</i>" : "<img src='/img/news/"+img+"' />";
 					var link = "<a href='"+response.items[i].guid+"'>"+response.items[i].title+"</a>";
 					
 					self.randomNews.push({icon: icon, title: link, key: key});
@@ -74,7 +78,7 @@ class News extends Base {
 	}
 		
 
-	processNews(news, key = null) {
+	processNews(key = null) {
 		var self = this;
 		$(this.randomNews).each(function(ind){
 			if(this.key != key) {
@@ -91,16 +95,17 @@ class News extends Base {
 	}
 		
 	printNews() {
+		let self = this;
 		if(this.currentRss == this.callRss && this.flagCall) {
 			this.flagCall = false;
-			this.processNews(this.randomNews);
+			this.processNews();
 		} else if(this.flagCall) {
-			this.setTimeout(this.printNews, 500);
+			setTimeout(function() {self.printNews.call(self);}, 500);
 		}
 	}
 
 	updateNews() {
-		var self = this;
+		let self = this;
 		this.flagCall = true;
 		this.randomNews = [];
 
@@ -111,11 +116,11 @@ class News extends Base {
 					$(self.newsSource).each(function(elem){
 						if(this.key == _k) {
 							self.callRss++;
-							self.getNews(this.url, this.key, this.icon);
+							self.getNews.call(self, this.url, this.key, this.icon);
 						}
 					});
-					self.printNews();
 				});
+				self.printNews.call(self);
 			}
 		});
 	}
@@ -140,8 +145,8 @@ class News extends Base {
 				n.push($(this).val());
 			});
 
-			self.setInStorage("news", n, function(){
-				self.updateNews();
+			top.app.factories.news.setInStorage("news", n, function(){
+				top.app.factories.news.updateNews();
 			});
 		});
 	}

@@ -50,7 +50,7 @@ class Settings extends Base {
 			}
 		});
 
-		$("#settings input[type='checkbox']").click(function(){		
+		$("#settings input[type='checkbox'][name='extendWeather']").click(function(){		
 			self.setInStorage($(this).attr('name'), $(this).is(":checked"));
 		});
 

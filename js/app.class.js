@@ -8,6 +8,7 @@ class App extends Base {
 		this.factories.settings = new Settings();
 		this.factories.weather = new Weather();
 		this.factories.links = new Links();
+		this.factories.news = new News();
 
 		this.updateTrads();
 
