@@ -22,6 +22,9 @@ class App extends Base {
 
 	updateClock() {
 		var now = new Date(); // current date
+		if((now.getHours() == 5 || now.getHours() == 12 || now.getHours() == 21) && now.getMinutes() == 0 && now.getSeconds() == 0) {
+			this.updateGreetings();
+		}
 		var time = ("0" + now.getHours()).slice(-2) + ' : ' + ("0" + now.getMinutes()).slice(-2) + ' : ' + ("0" + now.getSeconds()).slice(-2);
 		$('#clock h1').html(time);
 		//this.updateGreetings();
