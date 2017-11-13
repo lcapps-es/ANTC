@@ -115,8 +115,6 @@ class App extends Base {
 		});
 		
 		$(document).mouseup(function(e) {
-			var container = $("#weather");
-		
 			// if the target of the click isn't the container nor a descendant of the container
 			if (!$("#weather").is(e.target) && $("#weather").has(e.target).length === 0 && $("#weather").is(':visible')) {
 				$("#weather").click();

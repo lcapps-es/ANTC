@@ -17,7 +17,7 @@ class Links extends Base {
 						var a = $('<a>');
 						a.prop('href', value.link);
 						var img = $('<img>');
-						img.prop('src', 'https://antc-favicon.herokuapp.com/icon?size=16..64..128&url='+value.link);
+						img.prop('src', self.faviconURL+value.link);
 						a.append(img);
 						$('#linkbar').append(a);
 						var save = $('<i class="material-icons" data-key="'+key+'">save</i>');

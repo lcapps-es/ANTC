@@ -48,14 +48,11 @@ class News extends Base {
 	getNews( rss, key, img = null) {
 		var self = this;
 		$.get({
-			
-			url: "https://api.rss2json.com/v1/api.json",
+			url: self.feedURL,
 			//url: "https://antc-rss-json.herokuapp.com/",
 			//url: "https://antc-rss-json.herokuapp.com/?rss",
 			data : {
-				rss_url: rss,
 				rss: rss,
-				api_key: "oogqwcfxocr0aisyxknad6erosucxt3kprkwsmhn"
 			}
 			
 		}).done(function(response){
@@ -63,13 +60,13 @@ class News extends Base {
 			
 			self.currentRss++;
 	
-			if(response != undefined && response.status != undefined && response.status == "ok" && response.items != undefined) {
+			if(response != undefined && response != '' && response.items != undefined) {
 				var max = 10;
 				$(".marquee").show();
 	
 				for(var i = 0; i < response.items.length && i < max; i++ ) {
 					var icon = (img == null) ? "<i class='material-icons'>sms_failed</i>" : "<img src='/img/news/"+img+"' />";
-					var link = "<a href='"+response.items[i].guid+"'>"+response.items[i].title+"</a>";
+					var link = "<a href='"+response.items[i].url+"'>"+response.items[i].title+"</a>";
 					
 					self.randomNews.push({icon: icon, title: link, key: key});
 				}
@@ -88,6 +85,8 @@ class News extends Base {
 				$(".marquee > p").append(t.icon + t.title);
 			}
 		});
+
+		$(".marquee > p").css('animation-duration', 80 * parseInt(this.currentRss) + 's');
 
 		if(this.randomNews.length > 0) {
 			this.processNews();
@@ -122,32 +121,6 @@ class News extends Base {
 				});
 				self.printNews.call(self);
 			}
-		});
-	}
-
-	loadNewsSource() {
-		var self = this;
-		$(this.newsSource).each(function(elem){
-			$("p#news").next("ul").append("<li><input class='news' type='checkbox' name='news[]' key='"+this.key+"' value='"+this.key+"' /> "+this.name+"</li>");
-		});
-
-		this.getFromStorage('news', function(data){
-			if(self.isInStorage(data, 'news')) {
-				$(data.news).each(function(elem){
-					$("input[key="+this+"]").prop('checked', true);
-				});
-			}	
-		});
-
-		$("input.news").change(function() {
-			var n = [];
-			$("input.news:checked").each(function(){
-				n.push($(this).val());
-			});
-
-			top.app.factories.news.setInStorage("news", n, function(){
-				top.app.factories.news.updateNews();
-			});
 		});
 	}
 }

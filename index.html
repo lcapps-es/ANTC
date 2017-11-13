@@ -13,8 +13,35 @@
 </head>
 <body>
 	<div id="background"></div>
-	<div class="marquee">
-		<p></p>
+	<div id="top">
+		<div class="marquee"><p></p></div>
+		<div id="weather">
+			<div id="temperature">
+				<div id="tempnow" class="half"></div>
+				<div id="summary" class="half">
+					<div id="sumicon"></div>
+					<div id="others"></div>
+				</div>
+			</div>
+			<div id="otherData">
+				<div id="humidity" class="half">
+					<span id="humValue">-</span>
+					<i class="wi wi-humidity"></i>
+				</div>
+				<div id="windSpeed" class="half">
+					<span id="windValue">-</span>
+					<i class="wi  wi-wind "></i>
+				</div>
+			</div>
+			<div id="location" class="">-</div>
+		</div>
+		<div id="miniweather">
+			<span id="miniicon"></span>
+			<span id="minitemp"></span>
+		</div>
+		<div id="settingsButton" class="rotateOnHover">
+			<i class="material-icons rotate">settings</i>
+		</div>
 	</div>
 	<div class="center">
 		<div id="clock">
@@ -22,34 +49,7 @@
 			<h2 id="greetings"></h2>
 		</div>
 	</div>
-	<div id="weather">
-		<div id="temperature">
-			<div id="tempnow" class="half"></div>
-			<div id="summary" class="half">
-				<div id="sumicon"></div>
-				<div id="others"></div>
-			</div>
-		</div>
-		<div id="otherData">
-			<div id="humidity" class="half">
-				<span id="humValue">-</span>
-				<i class="wi wi-humidity"></i>
-			</div>
-			<div id="windSpeed" class="half">
-				<span id="windValue">-</span>
-				<i class="wi  wi-wind "></i>
-			</div>
-		</div>
-		<div id="location" class="">-</div>
-	</div>
-	<div id="miniweather">
-		<span id="miniicon"></span>
-		<span id="minitemp"></span>
-	</div>
 	<div id="linkparent"><div id="linkbar"></div></div>
-	<div id="settingsButton" class="rotateOnHover">
-		<i class="material-icons rotate">settings</i>
-	</div>
 	<div id="settings">
 		<div class="rotateOnHover"><i id="close-settings" class="material-icons rotate">close</i></div>
 		<div class="content">
@@ -57,7 +57,7 @@
 			<p><span trad="name"></span>: <input type="text" name="name"> </p>
 			<p><span trad="location"></span>: <input type="text" name="location"> </p>
 			<p><span trad="viewWeatherExtend"></span> <input type="checkbox" name="extendWeather" /></p>
-			<p id="news"><span trad="viewNews"></span> NEWWWSS </p>
+			<p id="news"><span trad="viewNews"></span></p>
 			<ul id="newsList"></ul>
 			<div id="linkSettings">
 				<span trad="viewLinks"></span>

@@ -46,5 +46,9 @@
 	"viewLinks": {
 		"message": "Accesos Directos",
 		"description": ""
+	},
+	"viewNews": {
+		"message": "Lista de Noticias",
+		"description": ""
 	}
 }

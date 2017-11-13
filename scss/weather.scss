@@ -2,13 +2,11 @@
 	padding: 10px;
 	border-radius: 4px;
 	background-color: $bckColor;
-	position: absolute;
-	top: 80px;
-	right: 25px;
 	text-align: center;
 	font-size: 1em;
 	display: none;
 	transition: 1s easy-in-out;
+	float: right;
 }
 
 #temperature {
