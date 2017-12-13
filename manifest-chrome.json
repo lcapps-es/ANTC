@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extName__",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "default_locale": "es",
   "description": "__MSG_extDesc__",
   "icons": {
@@ -36,5 +36,5 @@
     "unlimitedStorage"
   ],
   "short_name": "__MSG_extName__",
-  "version_name": "Alpha 0.2.1"
+  "version_name": "Stable 1.0.0"
 }

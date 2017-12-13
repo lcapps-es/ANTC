@@ -14,6 +14,7 @@ class News extends Base {
 		this.currentRss = 0;
 		this.loopPrint = 0;
 		this.flagCall = true;
+		this.maxNewsPerSource = 10;
 
 		this.loadNewsSource();
 		this.updateNews();
@@ -57,43 +58,49 @@ class News extends Base {
 			
 		}).done(function(response){
 			console.log(rss, response);
+
+			var news = [];
 			
 			self.currentRss++;
 	
 			if(response != undefined && response != '' && response.items != undefined) {
-				var max = 10;
-				$(".marquee").show();
-	
-				for(var i = 0; i < response.items.length && i < max; i++ ) {
+				for(var i = 0; i < response.items.length && i < self.maxNewsPerSource; i++ ) {
 					var icon = (img == null) ? "<i class='material-icons'>sms_failed</i>" : "<img src='/img/news/"+img+"' />";
 					var link = "<a href='"+response.items[i].url+"'>"+response.items[i].title+"</a>";
 					
-					self.randomNews.push({icon: icon, title: link, key: key});
+					news.push({icon: icon, title: link});
 				}
 			}
+			self.randomNews.push({key: key, news: news});
 		});
 	}
 		
 
 	processNews(key = null) {
 		var self = this;
-		$(this.randomNews).each(function(ind){
-			if(this.key != key) {
-				key = this.key;
-				var t = this;
-				self.randomNews.splice(ind,1);	
-				$(".marquee > p").append(t.icon + t.title);
-			}
-		});
 
-		$(".marquee > p").css('animation-duration', 80 * parseInt(this.currentRss) + 's');
-
-		if(this.randomNews.length > 0) {
-			this.processNews();
+		for(var i = 0; i < this.maxNewsPerSource; i++ ) {
+			$(this.randomNews).each(function(ind){
+				if(typeof this.news[i] != 'undefined') {
+					var t = this.news[i];
+					$(".marquee > p").append(t.icon + t.title);
+				}
+			});
 		}
+
+		var duration = 80 * parseInt(this.currentRss);
+		if(duration > 160) {
+			duration = 175;
+		}
+		$(".marquee > p").css('animation-duration', duration + 's');
+
 	}
 		
 	printNews() {
+		if(this.currentRss > 0) {
+			$(".marquee").show();
+			$(".marquee > p").html('');
+		}
 		let self = this;
 		if(this.currentRss == this.callRss && this.flagCall) {
 			this.flagCall = false;
@@ -107,6 +114,9 @@ class News extends Base {
 		let self = this;
 		this.flagCall = true;
 		this.randomNews = [];
+		this.callRss = 0;
+		this.currentRss = 0;
+		this.loopPrint = 0;
 
 		this.getFromStorage('news', function(data){
 			if(self.isInStorage(data, 'news')) {

@@ -39,5 +39,5 @@ class Base {
 			$(this).text(trad);
 		});
 	}
-	
+
 }

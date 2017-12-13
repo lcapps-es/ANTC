@@ -122,7 +122,7 @@ module.exports = function(grunt) {
 		}
 		modifyJSON('package.json', 'version', grunt.option('ver'));
 		modifyJSON('manifest-chrome.json', 'version', grunt.option('ver'));
-		modifyJSON('manifest-chrome.json', 'version_name', "Alpha "+grunt.option('ver'));
+		modifyJSON('manifest-chrome.json', 'version_name', "Stable "+grunt.option('ver'));
 		modifyJSON('manifest-firefox.json', 'version', grunt.option('ver'));
 	});
 
