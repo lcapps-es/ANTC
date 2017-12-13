@@ -1,22 +1,27 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extName__",
-  "version": "0.1.1",
-
+  "version": "1.0.0",
   "default_locale": "es",
   "description": "__MSG_extDesc__",
   "icons": {
-    "128": "img/icon_128.jpg",
+    "16": "img/icon_16.jpg",
     "48": "img/icon_48.jpg",
-    "16": "img/icon_16.jpg"
+    "128": "img/icon_128.jpg"
   },
-
   "author": "LCApps",
-  "chrome_url_overrides" : {
+  "chrome_url_overrides": {
     "newtab": "index.html"
   },
-  "content_security_policy" : "default-src 'self' data: https://api.openweathermap.org/ https://source.unsplash.com/ https://images.unsplash.com/ ; img-src 'self' data: https: http: ; style-src 'unsafe-inline' 'self' data: https: http: ",
-  "optional_permissions": ["tabs","geolocation"],
-  "permissions": ["geolocation", "storage", "unlimitedStorage"],
+  "content_security_policy": "default-src 'self' data: https://api.openweathermap.org/ https://source.unsplash.com/ https://images.unsplash.com/ ; img-src 'self' data: https: http: ; style-src 'unsafe-inline' 'self' data: https: http: ",
+  "optional_permissions": [
+    "tabs",
+    "geolocation"
+  ],
+  "permissions": [
+    "geolocation",
+    "storage",
+    "unlimitedStorage"
+  ],
   "short_name": "__MSG_extName__"
 }

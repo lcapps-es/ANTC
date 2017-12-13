@@ -1,1 +1,6 @@
 manifest.json
+*.zip
+node_modules/
+app.min.js.map
+.vscode/
+package-lock.json

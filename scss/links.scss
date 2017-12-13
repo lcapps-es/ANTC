@@ -1,0 +1,24 @@
+#linkparent {
+	position: absolute;
+	display: flex;
+	bottom: 25px;
+	left: 5%;
+	right: 5%;
+	margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+#linkbar {
+	height: 40px;
+	border-radius: 6px;
+	background-color: $bckColor;
+	text-align: center;
+
+	a {
+		img {
+			height: 70%;
+			padding: 5px;
+		}
+	}
+}

@@ -1,0 +1,32 @@
+{
+  "name": "antc",
+  "version": "1.0.0",
+  "description": "Awesome New Tab Customized",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amg1893/ANTC.git"
+  },
+  "author": "Adrian Mora & Alvaro Tellez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/amg1893/ANTC/issues"
+  },
+  "homepage": "https://github.com/amg1893/ANTC#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "grunt": "^1.0.1",
+    "grunt-babel": "^7.0.0",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-sass": "^2.0.0",
+    "grunt-zip": "^0.17.1",
+    "load-grunt-tasks": "^3.5.2",
+    "time-grunt": "^1.4.0"
+  }
+}
