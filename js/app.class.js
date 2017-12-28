@@ -84,7 +84,7 @@ class App extends Base {
 				self.getFromStorage('bgBookmarks', function(data){
 					if(self.isInStorage(data, 'bgBookmarks')) {
 						var id = data.bgBookmarks[Math.floor(Math.random() * data.bgBookmarks.length)];
-						self.getBackground(id);
+						self.getBackground(id, reload);
 					}
 				});
 			} else {
@@ -92,14 +92,14 @@ class App extends Base {
 				photo.getByKeyword('nature', {sorting: 'random'}, function(resp){
 					if(typeof resp.images != 'undefined') {
 						var image = resp.images[0];
-						self.getBackground(image.id);
+						self.getBackground(image.id, reload);
 					}
 				});
 			}
 		});
 	}
 
-	getBackground(id) {
+	getBackground(id, reload = false) {
 		let self = this;
 		var photo = new WallhavenApi();
 		var xhr = new XMLHttpRequest();
