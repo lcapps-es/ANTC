@@ -16,7 +16,7 @@ class Base {
 	}
 
 	isInStorage(data, field) {
-		return data && typeof data[field] !== 'undefined' && ((typeof data[field] == 'string' && data[field] != '') || (typeof data[field] == 'object' && !$.isEmptyObject(data[field])));
+		return data && typeof data[field] !== 'undefined' && ((typeof data[field] == 'string' && data[field] != '') || (typeof data[field] == 'object' && !$.isEmptyObject(data[field])) || (typeof data[field] == 'boolean'));
 	}
 
 	deleteAllStorage() {
@@ -24,6 +24,8 @@ class Base {
 		this.setInStorage('background', {});
 		this.setInStorage('location', '');
 		this.setInStorage('links', []);
+		this.setInStorage('bgBookmarks', []);
+		this.setInStorage('showLikedBackgrounds', false);
 		location.reload();
 	}
 	

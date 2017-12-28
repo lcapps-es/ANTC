@@ -13,15 +13,16 @@
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-  "content_security_policy": "default-src 'self' data: https://api.openweathermap.org/ https://source.unsplash.com/ https://images.unsplash.com/ https://antc-rss-json.herokuapp.com https://api.rss2json.com ; img-src 'self' data: https: http: ; style-src 'unsafe-inline' 'self' data: https: http: ",
+  "content_security_policy": "default-src 'self' data: https://api.openweathermap.org/ https://antc-rss-json.herokuapp.com/ https://antc-wallhavenapi.herokuapp.com/ https://wallpapers.wallhaven.cc/ ; img-src 'self' data: https: http: ; style-src 'unsafe-inline' 'self' data: https: http: ",
   "current_locale": "es",
   "externally_connectable": {
     "matches": [
       "https://api.openweathermap.org/*",
-      "https://*.unsplash.com/*",
       "http://*.programmingexcuses.com/*",
       "https://api.rss2json.com/*",
-      "https://antc-rss-json.herokuapp.com/*"
+      "https://antc-rss-json.herokuapp.com/*",
+      "https://wallhaven-api.now.sh/*",
+      "https://*.wallhaven.cc/"
     ]
   },
   "incognito": "split",

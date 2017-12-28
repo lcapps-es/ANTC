@@ -26,9 +26,9 @@ module.exports = function(grunt) {
 				tasks : 'sass'
 			},
 			js : {
-				files : [ './js/*.js' ],
+				files : [ './js/*.js', './libs/*.js' ],
 				tasks : 'js'
-			},
+			}
 		},
 
 		sass : {
@@ -52,6 +52,10 @@ module.exports = function(grunt) {
 			js : {
 				src : ['./js/base.class.js', './js/*.class.js'],
 				dest : './unificator.class.js'
+			},
+			libjs : {
+				src : './libs/*.js',
+				dest : './unificatorlibs.class.js'
 			}
 		},
 
@@ -65,15 +69,19 @@ module.exports = function(grunt) {
 			},
 			dist : {
 				files : {
-					'./app.min.js' : './unificator.class.js'
+					'./app.min.js' : './unificator.class.js',
+					'./libs.min.js' : './unificatorlibs.class.js',
 				}
-			}
+			},
 		},
 
 		clean : {
 			js : {
 				src : [ './unificator.class.js' ]
 			},
+			libjs : {
+				src : [ './unificatorlibs.class.js' ]
+			}
 		},
 
 		copy: {
@@ -110,7 +118,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('deploy', [ 'sass', 'js', 'version', 'prepareZip' ]);
 	grunt.registerTask('devChrome', [ 'default', 'copy:chrome', 'watch' ]);
 	grunt.registerTask('devFirefox', [ 'default', 'copy:firefox', 'watch' ]);
-	grunt.registerTask('js', [ 'concat:js', 'babel', 'clean:js' ]);
+	grunt.registerTask('js', [ 'concat', 'babel', 'clean' ]);
 
 	grunt.registerTask('version', function(){
 		var version = grunt.option('ver');

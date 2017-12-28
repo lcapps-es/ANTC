@@ -30,7 +30,7 @@ class Weather extends Base {
 			if(data.extendWeather !== undefined && data.extendWeather === true) {
 				$("#settings input[name='extendWeather']").click();
 			}
-		});	
+		});
 	}
 
 

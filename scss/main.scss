@@ -46,6 +46,19 @@ input[type='text']:focus {
 	}
 }
 
+#likeContainer {
+	position: absolute;
+	display: flex;
+	bottom: 25px;
+	right: 25px;
+	margin: 0 auto;
+    align-items: center;
+	justify-content: center;
+	background-color: $bckColor;
+	padding: 7px;
+	border-radius: 4px;
+}
+
 .center {
 	top: 50%;
 	width: 100%;
@@ -57,7 +70,6 @@ input[type='text']:focus {
 	left: 50%;
 	padding: 20px 0;
 }
-
 
 
 #cache, canvas {

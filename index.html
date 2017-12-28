@@ -4,11 +4,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<title trad="newTab">New Tab</title>
-	<link rel="stylesheet" href="libs/weather-icons/css/weather-icons.min.css" />
-	<link rel="stylesheet" href="libs/weather-icons/css/weather-icons-wind.min.css" />
 	<link rel="stylesheet" href="fonts/stylesheet.css">
 	<link rel="stylesheet" href="style.min.css">
-
 
 </head>
 <body>
@@ -50,6 +47,7 @@
 		</div>
 	</div>
 	<div id="linkparent"><div id="linkbar"></div></div>
+	<div id="likeContainer"><i class="material-icons">star_border</i></div>
 	<div id="settings">
 		<div class="rotateOnHover"><i id="close-settings" class="material-icons rotate">close</i></div>
 		<div class="content">
@@ -57,6 +55,7 @@
 			<p><span trad="name"></span>: <input type="text" name="name"> </p>
 			<p><span trad="location"></span>: <input type="text" name="location"> </p>
 			<p><span trad="viewWeatherExtend"></span> <input type="checkbox" name="extendWeather" /></p>
+			<p><span trad="showLikedBackgrounds"></span> <input type="checkbox" name="showLikedBackgrounds" /></p>
 			<p id="news"><span trad="viewNews"></span></p>
 			<ul id="newsList"></ul>
 			<div id="linkSettings">
@@ -68,10 +67,7 @@
 		</div>
 		<div id="footer"></div>
 	</div>
-	<script src="libs/jquery-3.2.1.min.js"></script>
-	<script src="libs/jquery.waitforimages.min.js"></script>
-	<script src="libs/unsplash-source.min.js"></script>
-	<script src="libs/favicon.js"></script>
+	<script src="/libs.min.js"></script>
 	<script src="/app.min.js"></script>
 </body>
 </html>

@@ -13,7 +13,6 @@ class Settings extends Base {
 		}
 
 		this.setEvents();
-
 	}
 
 
@@ -27,9 +26,22 @@ class Settings extends Base {
 		}
 	}
 
+	getSettingLikedBackgrounds(callback) {
+		let self = this;
+		this.getFromStorage('showLikedBackgrounds', function(data){
+			if(self.isInStorage(data, 'showLikedBackgrounds')) {
+				if(data.showLikedBackgrounds) {
+					callback(true);
+				} else {
+					callback(false);
+				}
+			} else {
+				callback(false);
+			}
+		});
+	}
+
 	setEvents() {
-		let self = this;		
-		
 		$('#settingsButton').on('click', function(e){
 			$(this).hide();
 			$('#settings').css('left', 0);
@@ -46,12 +58,23 @@ class Settings extends Base {
 		$('#deleteData').on('click', function(e){
 			var c = confirm('All data will be deleted. Do you wish to continue?');
 			if(c) {
-				self.deleteAllStorage();
+				top.app.deleteAllStorage();
 			}
 		});
 
-		$("#settings input[type='checkbox'][name='extendWeather']").click(function(){		
-			self.setInStorage($(this).attr('name'), $(this).is(":checked"));
+		this.getSettingLikedBackgrounds(function(bool){
+			if(bool) {
+				$("#settings input[name='showLikedBackgrounds']").prop('checked', true);
+			}
+		});
+
+		$("#settings input[name='extendWeather']").click(function(){
+			top.app.setInStorage($(this).attr('name'), $(this).is(":checked"));
+		});
+
+		$("#settings input[name='showLikedBackgrounds']").click(function(){
+			top.app.setInStorage($(this).attr('name'), $(this).is(":checked"));
+			top.app.cacheBackground();
 		});
 
 		$('input[name="newLinkUrl"]').on('keypress', function(e){

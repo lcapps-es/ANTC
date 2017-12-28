@@ -27,7 +27,6 @@ class App extends Base {
 		}
 		var time = ("0" + now.getHours()).slice(-2) + ' : ' + ("0" + now.getMinutes()).slice(-2) + ' : ' + ("0" + now.getSeconds()).slice(-2);
 		$('#clock h1').html(time);
-		//this.updateGreetings();
 		setTimeout(this.updateClock.bind(this), 1000);
 	}
 
@@ -69,6 +68,7 @@ class App extends Base {
 				$('#background').css('background-image', 'url("'+data.background.img+'")').waitForImages(function() {
 					$('#background').addClass('show');
 					self.cacheBackground(false);
+					self.showLikeBackground(data.background.id);
 				}, $.noop, true);
 			} else {
 				self.cacheBackground(true);
@@ -76,19 +76,40 @@ class App extends Base {
 		});
 	}
 
-
 	cacheBackground(reload = false) {
 		let self = this;
-		var photo = new UnsplashPhoto();
-		var url = photo.fromCategory('nature')/*.of(["trees", "water"])*/.size(1920,1080).fetch();
+		
+		this.factories.settings.getSettingLikedBackgrounds(function(likedBackgrounds){
+			if(likedBackgrounds) {
+				self.getFromStorage('bgBookmarks', function(data){
+					if(self.isInStorage(data, 'bgBookmarks')) {
+						var id = data.bgBookmarks[Math.floor(Math.random() * data.bgBookmarks.length)];
+						self.getBackground(id);
+					}
+				});
+			} else {
+				var photo = new WallhavenApi();
+				photo.getByKeyword('nature', {sorting: 'random'}, function(resp){
+					if(typeof resp.images != 'undefined') {
+						var image = resp.images[0];
+						self.getBackground(image.id);
+					}
+				});
+			}
+		});
+	}
 
+	getBackground(id) {
+		let self = this;
+		var photo = new WallhavenApi();
 		var xhr = new XMLHttpRequest();
+		var url = photo.getFullImageURL(id);
 		xhr.onload = function() {
 			var reader = new FileReader();
 			reader.onloadend = function() {
 
 				var now = new Date();
-				self.setInStorage('background', {img: reader.result, timestamp: now.getTime()},function() {
+				self.setInStorage('background', {img: reader.result, timestamp: now.getTime(), id: id}, function() {
 					if(reload) {
 						self.updateBackground();
 					}
@@ -101,14 +122,92 @@ class App extends Base {
 		xhr.send();
 	}
 
-	setEvents() {
+	showLikeBackground(id) {
+		let self = this;
+		this.getFromStorage('bgBookmarks', function(data){
+			if(self.isInStorage(data, 'bgBookmarks')) {
+				if(data.bgBookmarks.indexOf(id) >= 0) {
+					$('#likeContainer i').text('star');
+					$('#likeContainer').click(function(event){
+						top.app.removeLikeBackground(id);
+					});
+				} else {
+					$('#likeContainer i').text('star_border');
+					$('#likeContainer').click(function(event){
+						top.app.addLikeBackground(id);
+					});
+				}
+			} else {
+				$('#likeContainer i').text('star_border');
+				$('#likeContainer').click(function(event){
+					top.app.addLikeBackground(id);
+				});
+			}
+			$('#likeContainer').data('id', id);
+		});
+	}
 
-		var self = this;
+	addLikeBackground(id) {
+		let self = this;
+		this.getFromStorage('bgBookmarks', function(data){
+			if(self.isInStorage(data, 'bgBookmarks')) {
+				if(data.bgBookmarks.indexOf(id) >= 0) {
+					$('#likeContainer i').text('star');
+					$('#likeContainer').click(function(event){
+						top.app.removeLikeBackground(id);
+					});
+				} else {
+					data.bgBookmarks.push(id);
+					self.setInStorage('bgBookmarks', data.bgBookmarks, function() {
+						$('#likeContainer i').text('star');
+						$('#likeContainer').click(function(event){
+							top.app.removeLikeBackground(id);
+						});
+					});
+				}
+			} else {
+				var bgBookmarks = [id];
+				self.setInStorage('bgBookmarks', bgBookmarks, function() {
+					$('#likeContainer i').text('star');
+					$('#likeContainer').click(function(event){
+						top.app.removeLikeBackground(id);
+					});
+				});
+			}
+		});
+	}
+
+	removeLikeBackground(id) {
+		let self = this;
+		this.getFromStorage('bgBookmarks', function(data){
+			if(self.isInStorage(data, 'bgBookmarks')) {
+				var index = data.bgBookmarks.indexOf(id);
+				if(index >= 0) {
+					data.bgBookmarks.splice(index, 1);
+					self.setInStorage('bgBookmarks', data.bgBookmarks, function() {
+						$('#likeContainer i').text('star_border');
+						$('#likeContainer').click(function(event){
+							top.app.addLikeBackground(id);
+						});
+					});
+				} else {
+					$('#likeContainer i').text('star_border');
+					$('#likeContainer').click(function(event){
+						top.app.addLikeBackground(id);
+					});
+				}
+			}
+		});
+	}
+
+	setEvents() {
+		let self = this;
 		
 		$('input[name="name"]').on('keydown', function(e){
-			console.log("PASO");
 			self.factories.settings.changeName(e, this.value, self.updateGreetings.bind(self))
 		});
+
+		//$('#likeContainer').on('click');
 		
 		$(document).mouseup(function(e) {
 			// if the target of the click isn't the container nor a descendant of the container

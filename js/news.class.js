@@ -21,7 +21,7 @@ class News extends Base {
 	}
 
 	loadNewsSource() {
-		var self = this;
+		let self = this;
 		$(this.newsSource).each(function(elem){
 			$("ul#newsList").append("<li><input class='news' type='checkbox' name='news[]' key='"+this.key+"' value='"+this.key+"' /> "+this.name+"</li>");
 		});
@@ -47,7 +47,7 @@ class News extends Base {
 	}
 
 	getNews( rss, key, img = null) {
-		var self = this;
+		let self = this;
 		$.get({
 			url: self.feedURL,
 			//url: "https://antc-rss-json.herokuapp.com/",
@@ -77,7 +77,7 @@ class News extends Base {
 		
 
 	processNews(key = null) {
-		var self = this;
+		let self = this;
 
 		for(var i = 0; i < this.maxNewsPerSource; i++ ) {
 			$(this.randomNews).each(function(ind){

@@ -13,7 +13,7 @@
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-  "content_security_policy": "default-src 'self' data: https://api.openweathermap.org/ https://source.unsplash.com/ https://images.unsplash.com/ ; img-src 'self' data: https: http: ; style-src 'unsafe-inline' 'self' data: https: http: ",
+  "content_security_policy": "default-src 'self' data: https://api.openweathermap.org/ https://antc-rss-json.herokuapp.com/ https://antc-wallhavenapi.herokuapp.com/ https://wallpapers.wallhaven.cc/ ; img-src 'self' data: https: http: ; style-src 'unsafe-inline' 'self' data: https: http: ",
   "optional_permissions": [
     "tabs",
     "geolocation"

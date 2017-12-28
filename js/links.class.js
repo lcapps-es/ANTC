@@ -65,7 +65,7 @@ class Links extends Base {
 	}
 
 	deleteLink(key) {
-		var self = this;
+		let self = this;
 		this.getFromStorage('links',function(data){
 			if(!self.isInStorage(data, 'links')) {
 				data.links = [];
