@@ -54,5 +54,33 @@
 	"viewNews": {
 		"message": "Lista de Noticias",
 		"description": ""
+	},
+	"viewWallpapers": {
+		"message": "Fondos de Pantalla",
+		"description": ""
+	},
+	"deleteData": {
+		"message": "Todos los datos serán borrados. ¿Desea continuar?",
+		"description": ""
+	},
+	"general": {
+		"message": "General",
+		"description": ""
+	},
+	"links": {
+		"message": "Enlaces",
+		"description": ""
+	},
+	"news": {
+		"message": "Noticias",
+		"description": ""
+	},
+	"wallpaper": {
+		"message": "Fondos de Pantalla",
+		"description": ""
+	},
+	"about": {
+		"message": "Sobre nosotros",
+		"description": ""
 	}
 }

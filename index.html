@@ -13,19 +13,19 @@
 	<div id="top">
 		<div class="marquee"><p></p></div>
 		<div id="weather">
-			<div id="temperature">
-				<div id="tempnow" class="half"></div>
-				<div id="summary" class="half">
+			<div id="temperature" class="row">
+				<div id="tempnow" class="col-6"></div>
+				<div id="summary" class="col-6">
 					<div id="sumicon"></div>
 					<div id="others"></div>
 				</div>
 			</div>
-			<div id="otherData">
-				<div id="humidity" class="half">
+			<div id="otherData" class="row">
+				<div id="humidity" class="col-6">
 					<span id="humValue">-</span>
 					<i class="wi wi-humidity"></i>
 				</div>
-				<div id="windSpeed" class="half">
+				<div id="windSpeed" class="col-6">
 					<span id="windValue">-</span>
 					<i class="wi  wi-wind "></i>
 				</div>
@@ -49,23 +49,49 @@
 	<div id="linkparent"><div id="linkbar"></div></div>
 	<div id="likeContainer"><i class="material-icons">star_border</i></div>
 	<div id="settings">
-		<div class="rotateOnHover"><i id="close-settings" class="material-icons rotate">close</i></div>
 		<div class="content">
-			<h2 trad="settings"></h2>
-			<p><span trad="name"></span>: <input type="text" name="name"> </p>
-			<p><span trad="location"></span>: <input type="text" name="location"> </p>
-			<p><span trad="viewWeatherExtend"></span> <input type="checkbox" name="extendWeather" /></p>
-			<p><span trad="showLikedBackgrounds"></span> <input type="checkbox" name="showLikedBackgrounds" /></p>
-			<p id="news"><span trad="viewNews"></span></p>
-			<ul id="newsList"></ul>
-			<div id="linkSettings">
-				<span trad="viewLinks"></span>
-				<div id="linkList"></div>
-				<input type="text" name="newLinkUrl" placeholder="Url" />
+			<div class="rotateOnHover"><i id="close-settings" class="material-icons rotate">close</i></div>
+			<div class="row">
+				<div class="col-12"><h2 trad="settings"></h2></div>
+				<div class="col-12">
+					<div class="col-4">
+						<ul id="settingsTabs">
+							<li data-tab="generalTab" class="active" trad="general">General</li>
+							<li data-tab="newsTab" trad="news">News</li>
+							<li data-tab="linksTab" trad="links">Links</li>
+							<li data-tab="wallpaperTab" trad="wallpaper">Wallpaper</li>
+							<li data-tab="aboutTab" trad="about">About</li>
+						</ul>
+					</div>
+					<div class="col-8" id="tabContent">
+						<section id="generalTab">
+							<p><span trad="name"></span>: <input type="text" name="name"> </p>
+							<p><span trad="location"></span>: <input type="text" name="location"> </p>
+							<p><span trad="viewWeatherExtend"></span> <input type="checkbox" name="extendWeather" /></p>
+							<p><span trad="showLikedBackgrounds"></span> <input type="checkbox" name="showLikedBackgrounds" /></p>
+							<h5 trad="cleanData" id="deleteData">Clean</h5>
+						</section>
+						<section id="newsTab">
+							<p><span trad="viewNews"></span></p>
+							<ul id="newsList"></ul>
+						</section>
+						<section id="linksTab">
+							<p><span trad="viewLinks"></span></p>
+							<div id="linkList"></div>
+							<input type="text" name="newLinkUrl" placeholder="Url" />
+						</section>
+						<section id="wallpaperTab">
+							<p><span trad="viewWallpapers"></span></p>
+							<div id="wallpaperList" class="row"></div>
+						</section>
+						<section id="aboutTab">
+							<p>La vida</p>
+						</section>
+					</div>
+				</div>
+				<div class="col-12" id="footer"></div>
 			</div>
-			<h5 trad="cleanData" id="deleteData">Clean</h5>
 		</div>
-		<div id="footer"></div>
 	</div>
 	<script src="/libs.min.js"></script>
 	<script src="/app.min.js"></script>

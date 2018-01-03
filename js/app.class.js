@@ -152,28 +152,38 @@ class App extends Base {
 		this.getFromStorage('bgBookmarks', function(data){
 			if(self.isInStorage(data, 'bgBookmarks')) {
 				if(data.bgBookmarks.indexOf(id) >= 0) {
-					$('#likeContainer i').text('star');
-					$('#likeContainer').click(function(event){
-						top.app.removeLikeBackground(id);
-					});
-				} else {
-					data.bgBookmarks.push(id);
-					self.setInStorage('bgBookmarks', data.bgBookmarks, function() {
+					if($('#likeContainer').data('id') == id) {
 						$('#likeContainer i').text('star');
+						$('#likeContainer').off('click');
 						$('#likeContainer').click(function(event){
 							top.app.removeLikeBackground(id);
 						});
+					}
+				} else {
+					data.bgBookmarks.push(id);
+					self.setInStorage('bgBookmarks', data.bgBookmarks, function() {
+						if($('#likeContainer').data('id') == id) {
+							$('#likeContainer i').text('star');
+							$('#likeContainer').off('click');
+							$('#likeContainer').click(function(event){
+								top.app.removeLikeBackground(id);
+							});
+						}
 					});
 				}
 			} else {
 				var bgBookmarks = [id];
 				self.setInStorage('bgBookmarks', bgBookmarks, function() {
-					$('#likeContainer i').text('star');
-					$('#likeContainer').click(function(event){
-						top.app.removeLikeBackground(id);
-					});
+					if($('#likeContainer').data('id') == id) {
+						$('#likeContainer i').text('star');
+						$('#likeContainer').off('click');
+						$('#likeContainer').click(function(event){
+							top.app.removeLikeBackground(id);
+						});
+					}
 				});
 			}
+			top.app.factories.settings.getWallpaperList();
 		});
 	}
 
@@ -185,18 +195,25 @@ class App extends Base {
 				if(index >= 0) {
 					data.bgBookmarks.splice(index, 1);
 					self.setInStorage('bgBookmarks', data.bgBookmarks, function() {
+						if($('#likeContainer').data('id') == id) {
+							$('#likeContainer i').text('star_border');
+							$('#likeContainer').off('click');
+							$('#likeContainer').click(function(event){
+								top.app.addLikeBackground(id);
+							});
+						}
+					});
+				} else {
+					if($('#likeContainer').data('id') == id) {
 						$('#likeContainer i').text('star_border');
+						$('#likeContainer').off('click');
 						$('#likeContainer').click(function(event){
 							top.app.addLikeBackground(id);
 						});
-					});
-				} else {
-					$('#likeContainer i').text('star_border');
-					$('#likeContainer').click(function(event){
-						top.app.addLikeBackground(id);
-					});
+					}
 				}
 			}
+			top.app.factories.settings.getWallpaperList();
 		});
 	}
 
@@ -213,16 +230,10 @@ class App extends Base {
 			// if the target of the click isn't the container nor a descendant of the container
 			if (!$("#weather").is(e.target) && $("#weather").has(e.target).length === 0 && $("#weather").is(':visible')) {
 				$("#weather").click();
-			} else if(!$("#settings").is(e.target) && $("#settings").has(e.target).length === 0 && parseInt($("#settings").css('left')) == 0) {
-				$('#close-settings').click();
 			}
 		});
-		
 	}
-
 }
-
-
 
 $(document).ready(function(){
 	top.app = new App();

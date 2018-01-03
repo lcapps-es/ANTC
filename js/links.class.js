@@ -24,21 +24,31 @@ class Links extends Base {
 						save.on('click', function(e){
 							top.app.factories.links.setLink($('input[name="linkUrl'+$(this).data('key')+'"]').val(), $(this).data('key'));
 						});
+						save.addClass('non-draggable');
 						var close = $('<i class="material-icons" data-key="'+key+'">close</i>');
 						close.on('click', function(e){
 							top.app.factories.links.deleteLink($(this).data('key'));
 						});
+						close.addClass('non-draggable');
 						var p = $('<p>');
 						var inputUrl = $('<input>');
 						inputUrl.prop('name', 'linkUrl'+key);
 						inputUrl.prop('type', 'text');
+						inputUrl.addClass('non-draggable');
 						inputUrl.val(value.link);
 						p.append(inputUrl);
 						p.append(' ');
 						p.append(save);
 						p.append(close);
+						p.append('<span class="handler"><i class="material-icons">drag_handle</i></span>')
 						$('#linkList').append(p);
 					}
+				});
+				$('#linkList').sortable({
+					handler: '.handler',
+					filter: '.non-draggable',
+					animation: 150,
+					onEnd: top.app.factories.links.reorderLinks
 				});
 			}
 		});
@@ -61,6 +71,17 @@ class Links extends Base {
 			self.setInStorage('links', data.links, function(){
 				self.updateLinks();
 			});
+		});
+	}
+
+	reorderLinks() {
+		let self = this;
+		var links = [];
+		$('#linkList input').each(function(index, element){
+			links.push({link: $(element).val()});
+		});
+		top.app.setInStorage('links', links, function(){
+			top.app.factories.links.updateLinks();
 		});
 	}
 

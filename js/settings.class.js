@@ -13,6 +13,7 @@ class Settings extends Base {
 		}
 
 		this.setEvents();
+		this.getWallpaperList();
 	}
 
 
@@ -42,21 +43,21 @@ class Settings extends Base {
 	}
 
 	setEvents() {
-		$('#settingsButton').on('click', function(e){
-			$(this).hide();
-			$('#settings').css('left', 0);
-		});
-		
-		$('#close-settings').on('click', function(e){
-			$('#settings').css('left', '').on('transitionend', function(){
-				if(parseInt($('#settings').css('left')) < 0) {
-					$('#settingsButton').show();
-				}
-			});
+		$('#settingsButton, #close-settings').on('click', function(e){
+			$('#settings').toggle();
 		});
 
+		$('#settingsTabs li').on('click', function(e){
+			$('#tabContent section').hide();
+			$('#tabContent section').removeClass('show');
+			$('#settingsTabs li').removeClass('active');
+			$('#tabContent section#'+$(this).data('tab')).show();
+			$('#tabContent section#'+$(this).data('tab')).addClass('show');
+			$(this).addClass('active');
+		});
+		
 		$('#deleteData').on('click', function(e){
-			var c = confirm('All data will be deleted. Do you wish to continue?');
+			var c = confirm(top.app.getTrad('deleteData'));
 			if(c) {
 				top.app.deleteAllStorage();
 			}
@@ -81,6 +82,37 @@ class Settings extends Base {
 			if(e.which == 13) {
 				top.app.factories.links.setLink($('input[name="newLinkUrl"]').val());
 				$('input[name="newLinkUrl"]').val('');
+			}
+		});
+
+		$('#tabContent section#generalTab').show();
+		$('#tabContent section#generalTab').addClass('show');
+	}
+
+	getWallpaperList() {
+		let self = this;
+		$('#wallpaperList').html('');
+		this.getFromStorage('bgBookmarks', function(data){
+			if(self.isInStorage(data, 'bgBookmarks')) {
+				console.log(data);
+				var photo = new WallhavenApi();
+				data.bgBookmarks.forEach(function(element){
+					var a = $('<a>');
+					a.prop('href', photo.getFullImageURL(element));
+					a.prop('target', '_blank');
+					var img = $('<img>');
+					img.prop('src', photo.getThumbImageURL(element));
+					a.append(img);
+					var close = $('<i class="material-icons" data-id="'+element+'">close</i>');
+					close.on('click', function(e){
+						top.app.removeLikeBackground($(this).data('id'));
+					});
+					var div = $('<div>');
+					div.addClass('col-4');
+					div.append(a);
+					div.append(close);
+					$('#wallpaperList').append(div);
+				});
 			}
 		});
 	}
