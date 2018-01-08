@@ -1,0 +1,86 @@
+{
+	"extName": {
+		"message": "ANTC",
+		"description": "The title of the application, displayed in the web store."
+	},
+	"extDesc": {
+		"message": "Awesome New Tab Customized", 
+		"description":"The description of the application, displayed in the web store."
+	},
+	"greetingsMorning": {
+		"message": "Good morning",
+		"description": "Saludo de buenos días a un usuario"
+	},
+	"greetingsAfternoon": {
+		"message": "Good afternoon",
+		"description": "Saludo de buenas tardes a un usuario"
+	},
+	"greetingsEvening": {
+		"message": "Good evening",
+		"description": "Saludo de buenas noches a un usuario"
+	},
+	"settings": {
+		"message": "Settings",
+		"description": ""
+	},
+	"location": {
+		"message": "Location",
+		"description": ""
+	},
+	"cleanData": {
+		"message": "Clean data",
+		"description": ""
+	},
+	"newTab": {
+		"message": "New tab",
+		"description": "Titulo de la nueva pestaña en el navegador"
+	},
+	"viewWeatherExtend": {
+		"message": "Show weather expanded",
+		"description": ""
+	},
+	"showLikedBackgrounds": {
+		"message": "Only show backgrounds liked",
+		"description": ""
+	},
+	"name": {
+		"message": "Name",
+		"description": ""
+	},
+	"viewLinks": {
+		"message": "Shortcuts",
+		"description": ""
+	},
+	"viewNews": {
+		"message": "News list",
+		"description": ""
+	},
+	"viewWallpapers": {
+		"message": "Fondos de Pantalla",
+		"description": ""
+	},
+	"deleteData": {
+		"message": "Todos los datos serán borrados. ¿Desea continuar?",
+		"description": ""
+	},
+	"general": {
+		"message": "General",
+		"description": ""
+	},
+	"links": {
+		"message": "Enlaces",
+		"description": ""
+	},
+	"news": {
+		"message": "Noticias",
+		"description": ""
+	},
+	"wallpaper": {
+		"message": "Fondos de Pantalla",
+		"description": ""
+	},
+	"about": {
+		"message": "Sobre nosotros",
+		"description": ""
+	}
+}
