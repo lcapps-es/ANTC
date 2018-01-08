@@ -102,11 +102,18 @@ class Settings extends Base {
 					a.prop('target', '_blank');
 					var img = $('<img>');
 					img.prop('src', photo.getThumbImageURL(element));
-					a.append(img);
 					var close = $('<i class="material-icons" data-id="'+element+'">close</i>');
 					close.on('click', function(e){
-						top.app.removeLikeBackground($(this).data('id'));
+						var _w = $(this).prev('a').width();
+						var _id = $(this).data('id');
+						$(this).replaceWith("<div id='" + $(this).data('id') + "' class='deleteDiv'></div>");
+						$("#"+_id).width(_w);
+						// IMPORTANTE: El tiempo debe ser igual al del efecto definido en los estilos
+						setTimeout(function(){
+							top.app.removeLikeBackground(_id);
+						}, 400);
 					});
+					a.append(img);
 					var div = $('<div>');
 					div.addClass('col-4');
 					div.append(a);

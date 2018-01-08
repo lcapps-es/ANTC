@@ -29,6 +29,12 @@
 		background: white;
 		padding: 15px;
 		border-radius: 8px;
+		
+		div {
+			&.row {
+				height: 100%;
+			}
+		}
 
 		h2 {
 			margin-bottom: 10px;
@@ -75,6 +81,8 @@
 		}
 
 		#tabContent {
+			height: 60vh;
+			
 			section {
 				opacity: 0;	
 				display: hidden;
@@ -101,8 +109,28 @@
 
 				&#wallpaperTab {
 					#wallpaperList {
-						img {
-							width: 100%;
+
+						overflow-y: auto;
+    					height: 100%;
+
+						div {
+							padding: 5px;
+							
+							a {
+								
+								img {
+									width: 100%;
+								}
+							}
+
+							.deleteDiv {
+								height: 3px;
+								padding: 0px !important;
+								background-color: #c62828;
+								transition: width 0.4s;
+								width: 0px;
+								margin-bottom: 21px;
+							}
 						}
 					}
 				}
@@ -110,9 +138,12 @@
 		}
 
 		#footer {
-			bottom: 0px;
 			text-align: center;
+			position: fixed;
+    		bottom: 20px;
 		}
 	}
 
 }
+
+
