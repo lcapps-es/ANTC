@@ -4,3 +4,5 @@ node_modules/
 app.min.js.map
 .vscode/
 package-lock.json
+*.min.*
+style.min.css
