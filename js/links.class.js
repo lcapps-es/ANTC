@@ -48,6 +48,7 @@ class Links extends Base {
 					handler: '.handler',
 					filter: '.non-draggable',
 					animation: 150,
+					preventOnFilter: false,
 					onEnd: top.app.factories.links.reorderLinks
 				});
 			}

@@ -1,6 +1,10 @@
 
 @import 'vars';
 
+html {
+	overflow: hidden;
+}
+
 body {
 	font-family: 'Noto Sans', sans-serif;
 	cursor: default;
