@@ -1,5 +1,7 @@
 # Awesome New Tab Customized
-ANTC is a Firefox and Chrome Extension to change your new tab page to a personalized one. 
+ANTC is a Firefox and Chrome Extension to change your new tab page to a personalized one.  
+[Chrome Webstore](https://chrome.google.com/webstore/detail/antc/ojnganflgaccodphklohgilgflphfmhj) | 
+[Firefox Addons](https://chrome.google.com/webstore/detail/antc/ojnganflgaccodphklohgilgflphfmhj)
 
 ## Features
  - Time
