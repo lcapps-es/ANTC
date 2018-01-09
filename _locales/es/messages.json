@@ -86,5 +86,9 @@
 	"tags": {
 		"message": "Palabras clave",
 		"description": ""
+	},
+	"descTags": {
+		"message": "Palabras clave de búsqueda para la temática de las imágenes fondo. Estas palabras deben estar escritas en inglés",
+		"description": ""
 	}
 }
