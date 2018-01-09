@@ -82,5 +82,9 @@
 	"about": {
 		"message": "Sobre nosotros",
 		"description": ""
+	},
+	"tags": {
+		"message": "Palabras clave",
+		"description": ""
 	}
 }

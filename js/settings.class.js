@@ -85,8 +85,20 @@ class Settings extends Base {
 			}
 		});
 
+		$('input[name="tags"]').on('keypress', function (e) {
+			if (e.which == 13) {
+				if (!$(this).val() == "") {
+					console.log($(this).val());
+					top.app.setTag($(this).val());
+					$(this).val('').focus();
+				}
+			}
+		});
+
 		$('#tabContent section#generalTab').show();
 		$('#tabContent section#generalTab').addClass('show');
+
+		
 	}
 
 	getWallpaperList() {

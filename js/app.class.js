@@ -15,6 +15,7 @@ class App extends Base {
 		this.updateClock();
 		this.updateGreetings();
 		this.updateBackground();
+		this.printTags();
 
 		this.setEvents();
 
@@ -89,11 +90,27 @@ class App extends Base {
 				});
 			} else {
 				var photo = new WallhavenApi();
-				photo.getByKeyword('nature', {sorting: 'random'}, function(resp){
-					if(typeof resp.images != 'undefined') {
-						var image = resp.images[0];
-						self.getBackground(image.id, reload);
+
+				var tags = "nature";
+				self.getFromStorage('tags', function (data) {
+					if (self.isInStorage(data, 'tags')) {
+						tags = data.tags;
 					}
+
+					photo.getByKeyword(tags, {sorting: 'random', limit: 1}, function(resp){
+						if (typeof resp.images != 'undefined' && resp.images.length > 0) {
+							var image = resp.images[0];
+							self.getBackground(image.id, reload);
+						} else {
+							photo.getByKeyword("nature", { sorting: 'random', limit: 1 }, function (resp) {
+								if (typeof resp.images != 'undefined' && resp.images.length > 0) {
+									var image = resp.images[0];
+									self.getBackground(image.id, reload);
+								}
+							});
+						}
+					});
+
 				});
 			}
 		});
@@ -110,6 +127,7 @@ class App extends Base {
 
 				var now = new Date();
 				self.setInStorage('background', {img: reader.result, timestamp: now.getTime(), id: id}, function() {
+					console.log("Save next background");
 					if(reload) {
 						self.updateBackground();
 					}
@@ -230,6 +248,53 @@ class App extends Base {
 			// if the target of the click isn't the container nor a descendant of the container
 			if (!$("#weather").is(e.target) && $("#weather").has(e.target).length === 0 && $("#weather").is(':visible')) {
 				$("#weather").click();
+			}
+		});
+	}
+
+	setTag(tag) {
+
+		let self = this;
+		tag = tag.toLowerCase();
+
+		this.getFromStorage('tags', function (data) {
+			if (!self.isInStorage(data, 'tags')) {
+				data.tags = [tag];
+			} else {
+				if(data.tags.indexOf(tag) === -1) {
+					data.tags.push(tag);
+				}
+			}
+
+			self.setInStorage('tags', data.tags, function () {
+				self.printTags();
+			});
+
+		});
+	}
+
+	printTags() {
+
+		let self = this;		
+
+		this.getFromStorage('tags', function (data) {
+			if(self.isInStorage(data, 'tags')) {
+
+				$("#listTags").html('');
+				$.each(data.tags, function(i,v){
+					$("#listTags").append("<span class='tag' data-tag='"+v+"'>" + v + "<i class='material-icons'>close</i></span>");
+				});
+
+				$("#listTags > span > i").click(function(){
+					var tag = $(this).parent().data('tag');
+					$($(this).parent()).fadeOut("fast", function () {
+						var pos = data.tags.indexOf(tag);
+						data.tags.splice(pos,1);
+						self.setInStorage('tags', data.tags, null);
+					});
+
+				});
+
 			}
 		});
 	}
