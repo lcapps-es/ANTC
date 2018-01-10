@@ -90,5 +90,9 @@
 	"descTags": {
 		"message": "Palabras clave de búsqueda para la temática de las imágenes fondo. Estas palabras deben estar escritas en inglés",
 		"description": ""
+	},
+	"aboutUs": {
+		"message": "Los desarrolladores Álvaro Téllez y Adrián Mora pertenecen al grupo de programacion LCApps. Hemos hecho esta extension durante nuestro tiempo libre para mejorar el rendimiento de nuestro trabajo y poder tener una pestaña bonita al iniciar. Esperamos que os guste.",
+		"description": ""
 	}
 }

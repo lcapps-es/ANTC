@@ -74,6 +74,10 @@ $grid-spacing: 0;
 
 /* END GRID SYSTEM */
 
+sup .material-icons {
+	font-size: 15px !important;
+}
+
 #background {
 	z-index: -1;
 	position: absolute;
@@ -136,6 +140,36 @@ $grid-spacing: 0;
 	margin: 20px 35px;
 }
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+
+	&:hover{
+		 .tooltiptext {
+		visibility: visible;
+		}
+	}
+	
+	.tooltiptext {
+		visibility: hidden;
+		background-color: black;
+		color: #fff;
+		text-align: center;
+		padding: 5px;
+		border-radius: 6px;
+		width: 300px;
+	 
+		/* Position the tooltip text - see examples below! */
+		position: absolute;
+		z-index: 1;
+
+		&.tooltiptext-right {
+			top: -5px;
+    		left: 105%;
+		}
+
+	}
+}
 
 // Imports
 @import 'clock';

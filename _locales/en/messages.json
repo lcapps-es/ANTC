@@ -56,11 +56,11 @@
 		"description": ""
 	},
 	"viewWallpapers": {
-		"message": "Fondos de Pantalla",
+		"message": "Wallpapers",
 		"description": ""
 	},
 	"deleteData": {
-		"message": "Todos los datos serán borrados. ¿Desea continuar?",
+		"message": "All data will be deleted. Would you like to continue?",
 		"description": ""
 	},
 	"general": {
@@ -68,19 +68,31 @@
 		"description": ""
 	},
 	"links": {
-		"message": "Enlaces",
+		"message": "Links",
 		"description": ""
 	},
 	"news": {
-		"message": "Noticias",
+		"message": "News",
 		"description": ""
 	},
 	"wallpaper": {
-		"message": "Fondos de Pantalla",
+		"message": "Wallpapers",
 		"description": ""
 	},
 	"about": {
-		"message": "Sobre nosotros",
+		"message": "About Us",
+		"description": ""
+	},
+	"tags": {
+		"message": "Tags",
+		"description": ""
+	},
+	"descTags": {
+		"message": "Search tags for wallpapers. It must be in English",
+		"description": ""
+	},
+	"aboutUs": {
+		"message": "Álvaro Téllez and Adrián Mora are developers from LCApps, a developer group. We have developed this extension in our free time in order to improve our performance working and to have a pretty new tab when we start. We hope you like it.",
 		"description": ""
 	}
 }
