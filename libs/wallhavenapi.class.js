@@ -1,7 +1,7 @@
 class WallhavenApi {
 
 	constructor() {
-		this.baseURL = 'https://antc-wallhavenapi.herokuapp.com';
+		this.baseURL = 'https://antc-wallpaper.lcapps.es';
 		this.searchURL = this.baseURL+'/search';
 		this.detailsURL = this.baseURL+'/details/';
 		this.fullImageURL = "https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-<id>.jpg";

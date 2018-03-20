@@ -1,8 +1,8 @@
 class Base {
 
 	constructor() {
-		this.faviconURL = 'https://antc-favicon.herokuapp.com/icon?size=16..64..128&url=';
-		this.feedURL = 'https://antc-rss-json.herokuapp.com/?rss=';
+		this.faviconURL = 'https://antc-icon.lcapps.es/icon?size=16..64..128&url=';
+		this.feedURL = 'https://antc-rss.lcapps.es/?rss=';
 	}
 
 	setInStorage(field, value, callback) {
