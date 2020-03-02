@@ -4,7 +4,8 @@ class WallhavenApi {
 		this.baseURL = 'https://antc-wallpaper.lcapps.es';
 		this.searchURL = this.baseURL+'/search';
 		this.detailsURL = this.baseURL+'/details/';
-		this.fullImageURL = "https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-<id>.jpg";
+		//this.fullImageURL = "https://wallpapers.wallhaven.c<c/wallpapers/full/wallhaven-<id>.jpg";
+		this.fullImageURL = "https://w.wallhaven.cc/full/<id2>/wallhaven-<id>.jpg";
 		this.thumbURL = "https://alpha.wallhaven.cc/wallpapers/thumb/small/th-<id>.jpg";
 	}
 
@@ -70,7 +71,8 @@ class WallhavenApi {
 	}
 
 	getFullImageURL(id) {
-		return this.fullImageURL.replace('<id>', id);
+		var id2 = id.substring(0, 2);
+		return this.fullImageURL.replace('<id>', id).replace('<id2>', id2);
 	}
 
 	getThumbImageURL(id) {
