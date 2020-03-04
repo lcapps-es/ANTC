@@ -37,6 +37,7 @@ class WallhavenApi {
 				loop++;
 
 				if (resp.images != 'undefined' && resp.images.length > 0) {
+					resp.images = resp.images.sort(function (a, b) { return 0.5 - Math.random() })
 					result.push(resp.images);
 				}
 

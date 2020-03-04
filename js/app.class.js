@@ -97,7 +97,9 @@ class App extends Base {
 						tags = data.tags;
 					}
 
-					photo.getByKeyword(tags, {sorting: 'random', limit: 1}, function(resp){
+					var p = Math.floor(Math.random() * 1001);
+
+					photo.getByKeyword(tags, {sorting: 'random', limit: 1, page: p}, function(resp){
 						if (typeof resp.images != 'undefined' && resp.images.length > 0) {
 							var image = resp.images[0];
 							self.getBackground(image.id, reload);
